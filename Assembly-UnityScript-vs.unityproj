@@ -57,9 +57,10 @@
      <Compile Include="Assets\Misc Scripts\Visibility Culling\VisibilityCuller.js" />
      <Compile Include="Assets\Misc Scripts\Visibility Culling\VisibilityCullingArea.js" />
      <Compile Include="Assets\Scripts\AdminNetWork.js" />
+     <Compile Include="Assets\Scripts\AdminSpawnControl.js" />
      <Compile Include="Assets\Scripts\CameraFollow.js" />
      <Compile Include="Assets\Scripts\GoodNetWork.js" />
-     <Compile Include="Assets\Scripts\MoonCarControl.js" />
+     <Compile Include="Assets\Scripts\car_control.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\CameraRelativeControl.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\FirstPersonControl.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\FollowTransform.js" />
@@ -71,7 +72,6 @@
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\SidescrollControl.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\SmoothFollow2D.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\ZoomCamera.js" />
-     <Compile Include="Assets\Standard Assets (Mobile)\Scripts\car_control.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\tapcontrol.js" />
      <Compile Include="Assets\WeaponScripts\AI.js" />
      <Compile Include="Assets\WeaponScripts\AIAnimation.js" />

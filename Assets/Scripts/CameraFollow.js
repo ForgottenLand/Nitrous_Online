@@ -18,7 +18,7 @@ var height = 5.0;
 // How much we 
 var heightDamping = 2.0;
 var rotationDamping = 3.0;
-var mc:MoonCarControl;
+var mc:AdminSpawnControl;
 
 // Place the script in the Camera-Control group in the component menu
 @script AddComponentMenu("Camera-Control/Smooth Follow")
