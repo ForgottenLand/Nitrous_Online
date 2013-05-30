@@ -1,0 +1,49 @@
+Initialize engine version: 4.0.0f7
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [nvd3dum.dll 9.18.13.600]
+    Renderer: NVIDIA GeForce GT 650M 
+    Vendor:   NVIDIA
+    VRAM:     1994 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 DF24=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+- Completed reload, in  0.066 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\UnityScript.Lang.dll (this message is harmless)
+Platform assembly: C:\Users\John\Documents\MultiplayerTesting\Bin\Scene1_Data\Managed\Boo.Lang.dll (this message is harmless)
+Refreshing
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+
+1
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/ExportGenerated/StandalonePlayer/UnityEngineDebug.cpp Line: 43)
+
+Failed Network.Instantiate because we are not connected.
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 2460)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at MoonCarControl.OnLoaded () [0x00000] in <filename unknown>:0 
+UnityEngine.GameObject:SendMessage(String, Object, SendMessageOptions)
+UnityEngine.GameObject:SendMessage(String, SendMessageOptions)
+GoodNetWork:OnGUI()
+ 
+(Filename:  Line: -1)
+
+Received pong from 172.20.1.229:25002
+ 
+(Filename: C:/BuildAgent/work/812c4f5049264fad/Runtime/Network/NetworkManager.cpp Line: 833)
+
