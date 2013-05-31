@@ -12,16 +12,23 @@ Then we apply the smoothed values to the transform's position.
 // The target we are following
 var target : Transform;
 // The distance in the x-z plane to the target
-var distance = 10.0;
+var distance : float;
 // the height we want the camera to be above the target
-var height = 5.0;
+var height : float;
 // How much we 
-var heightDamping = 2.0;
-var rotationDamping = 3.0;
-var mc:AdminSpawnControl;
+var heightDamping : float;
+var rotationDamping : float;
+var mc : AdminSpawnControl;
 
 // Place the script in the Camera-Control group in the component menu
 @script AddComponentMenu("Camera-Control/Smooth Follow")
+
+function OnLoaded() {
+    distance = 8;
+    height = 2;
+    heightDamping = 4;
+    rotationDamping = 3;
+}
 
 function LateUpdate () {
 	// Early out if we don't have a target

@@ -1,7 +1,22 @@
 var avatar0 : Transform;
+var avatar1 : Transform;
+var avatar2 : Transform;
+var avatar3 : Transform;
+var avatar4 : Transform;
+var avatar5 : Transform;
+
+private var btnX:float;
+private var btnY:float;
+private var btnW:float;
+private var btnH:float;
+
+var selectNumber : int;
+var selected : boolean;
+
 var Player : GameObject;
 var playerClone: String;
 var mc : car_control;
+
 var forwardSpeed : float;
 var turnSpeed : float;
 var style:GUIStyle;
@@ -9,15 +24,86 @@ var acceleration : float;
 var currentSpeed : float;
 var maxSpeed: float;
 
-function OnLoaded(){ 
- 	Network.Instantiate(avatar0, transform.position, transform.rotation, 0);
- 	playerClone = "EmptyMoonCar(Clone)";
+function OnLoaded() {
+     btnX = Screen.width * 0.01;
+     btnY = Screen.width * 0.01;
+     btnW = Screen.width * 0.1;
+     btnH = Screen.width * 0.05;
+     maxSpeed = 1500000;
+}
+
+function SpawnCar(){ 
+   
+    switch(selectNumber){
+        case 0:
+            Network.Instantiate(avatar0, transform.position, transform.rotation, 0);
+            playerClone = "EmptyMoonCar(Clone)"; 
+        break;
+        case 1:
+            Network.Instantiate(avatar1, transform.position, transform.rotation, 0);
+            playerClone = "EmptyArcade(Clone)"; 
+        break;
+        case 2:
+            Network.Instantiate(avatar2, transform.position, transform.rotation, 0);
+            playerClone = "EmptyCharger(Clone)"; 
+        break;
+        case 3:
+            Network.Instantiate(avatar3, transform.position, transform.rotation, 0);
+            playerClone = "EmptyColt(Clone)"; 
+        break;
+        case 4:
+            Network.Instantiate(avatar4, transform.position, transform.rotation, 0);
+            playerClone = "EmptyGMC(Clone)"; 
+        break;
+        case 5:
+            Network.Instantiate(avatar5, transform.position, transform.rotation, 0);
+            playerClone = "EmptyPgt(Clone)"; 
+        break;
+    }
+ 	
   	Player = GameObject.Find(playerClone);
     Player.rigidbody.freezeRotation = true;
-    maxSpeed = 1500000;
 }
 
 function OnGUI(){
+    
+     if(!selected){
+         if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), "MoonCar")){
+             selectNumber = 0;
+             selected = true;
+             SpawnCar();
+         }
+         else if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), "Arcade")){
+             selectNumber = 1;
+             selected = true;
+             SpawnCar();
+         }
+         else if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), "Charger")){
+             selectNumber = 2;
+             selected = true;
+             SpawnCar();
+         }
+         else if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), "Colt")){
+             selectNumber = 3;
+             selected = true;
+             SpawnCar();
+         }
+         else if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), "GMC")){
+             selectNumber = 4;
+             selected = true;
+             SpawnCar();
+         }
+         else if(GUI.Button(Rect(btnX, btnY * 34, btnW, btnH), "Pgt")){
+             selectNumber = 5;
+             selected = true;
+             SpawnCar();
+         }
+         else
+         {
+         }
+         
+     }
+
     try{
          if(Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor){
          style.fontStyle = FontStyle.Italic;
@@ -37,7 +123,7 @@ function OnGUI(){
          if(Input.GetKey("w")){
              acceleration = 800;
          } else if(Input.GetKey("s")){
-             acceleration = -800;
+             acceleration = -3000;
          } else {
              acceleration = -100;
          }
