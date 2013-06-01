@@ -3,14 +3,13 @@ var avatar1 : Transform;
 var avatar2 : Transform;
 var avatar3 : Transform;
 var avatar4 : Transform;
-var avatar5 : Transform;
 
 private var btnX:float;
 private var btnY:float;
 private var btnW:float;
 private var btnH:float;
 
-var selectNumber : int;
+public var selectNumber : int;
 var selected : boolean;
 
 var Player : GameObject;
@@ -53,10 +52,6 @@ function SpawnCar(){
         break;
         case 4:
             Network.Instantiate(avatar4, transform.position, transform.rotation, 0);
-            playerClone = "EmptyGMC(Clone)"; 
-        break;
-        case 5:
-            Network.Instantiate(avatar5, transform.position, transform.rotation, 0);
             playerClone = "EmptyPgt(Clone)"; 
         break;
     }
@@ -88,13 +83,8 @@ function OnGUI(){
              selected = true;
              SpawnCar();
          }
-         else if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), "GMC")){
+         else if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), "Pgt")){
              selectNumber = 4;
-             selected = true;
-             SpawnCar();
-         }
-         else if(GUI.Button(Rect(btnX, btnY * 34, btnW, btnH), "Pgt")){
-             selectNumber = 5;
              selected = true;
              SpawnCar();
          }
@@ -122,6 +112,7 @@ function OnGUI(){
          }
          if(Input.GetKey("w")){
              acceleration = 800;
+             
          } else if(Input.GetKey("s")){
              acceleration = -3000;
          } else {

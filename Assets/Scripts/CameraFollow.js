@@ -19,13 +19,12 @@ var height : float;
 var heightDamping : float;
 var rotationDamping : float;
 var mc : AdminSpawnControl;
-
 // Place the script in the Camera-Control group in the component menu
 @script AddComponentMenu("Camera-Control/Smooth Follow")
 
 function OnLoaded() {
-    distance = 8;
-    height = 2;
+    distance = 6;
+    height = 1.2;
     heightDamping = 4;
     rotationDamping = 3;
 }
@@ -37,6 +36,10 @@ function LateUpdate () {
 	}catch(UnityException)
 	{}
 	
+    if(mc.selectNumber == 3)
+    height = 2;
+    distance = 8;
+    
 	if (!target)
 		return;
 	// Calculate the current rotation angles

@@ -92,6 +92,7 @@
      <Compile Include="Assets\WeaponScripts\RocketLauncher - Bots.js" />
      <Compile Include="Assets\WeaponScripts\RocketLauncher.js" />
      <Compile Include="Assets\WeaponScripts\SentryGun.js" />
+     <Compile Include="Assets\~AlternatePhysicsModel\Source Assets\Cars\Drive.js" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />

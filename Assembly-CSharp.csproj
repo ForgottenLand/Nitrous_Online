@@ -51,6 +51,7 @@
      <Compile Include="Assets\WeaponScripts\Explosion.cs" />
      <Compile Include="Assets\WeaponScripts\MissileLauncherC.cs" />
      <Compile Include="Assets\WeaponScripts\Projectile.cs" />
+     <Compile Include="Assets\~AlternatePhysicsModel\Source Assets\RotatableGuiItem.cs" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
