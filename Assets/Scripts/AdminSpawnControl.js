@@ -14,7 +14,6 @@ var selected : boolean;
 
 var Player : GameObject;
 var playerClone: String;
-var mc : car_control;
 
 var forwardSpeed : float;
 var turnSpeed : float;
@@ -22,6 +21,7 @@ var style:GUIStyle;
 var acceleration : float;
 var currentSpeed : float;
 var maxSpeed: float;
+var rolling : boolean;
 
 function OnLoaded() {
      btnX = Screen.width * 0.01;
@@ -109,23 +109,34 @@ function OnGUI(){
              Player.transform.Rotate(0,-0.2,0); 
          } else if(Input.GetKey("d")){
              Player.transform.Rotate(0,0.2,0); 
-         }
+         } else if(Input.GetKey("a") && Input.GetKey("s")){
+             Player.transform.Rotate(0,0.2,0); 
+         } else if(Input.GetKey("d") && Input.GetKey("s")){
+             Player.transform.Rotate(0,-0.2,0); 
+         } 
          if(Input.GetKey("w")){
              acceleration = 800;
-             
+             rolling = false;
          } else if(Input.GetKey("s")){
              acceleration = -3000;
+             rolling = false;
          } else {
-             acceleration = -100;
+             rolling = true;
+             acceleration = 0;
          }
          if(currentSpeed <= maxSpeed && acceleration > 0)
          {   
              currentSpeed += acceleration;
          }
-         if(currentSpeed >= 0 && acceleration < 0)
+         if(currentSpeed >= (-maxSpeed/50) && acceleration < 0)
          {
              currentSpeed += acceleration;
          } 
+         
+         if(rolling && currentSpeed > 0)
+             currentSpeed -= 100;
+         else if(rolling && currentSpeed < 0)
+             currentSpeed += 100;
             
          Player.rigidbody.AddRelativeForce(0,0,currentSpeed); 
         }

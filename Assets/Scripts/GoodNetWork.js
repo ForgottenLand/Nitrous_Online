@@ -18,7 +18,7 @@ function Start() {
 
 function startServer(){
 	Network.InitializeServer(32,25002, !Network.HavePublicAddress);
-	MasterServer.RegisterHost(gameName,"Multiplayer Testing","This is a test");
+	MasterServer.RegisterHost(gameName,"Multiplayer Testing @ " + Network.player.ipAddress,"This is a test");
 }
 
 function refreshHostList(){
@@ -30,7 +30,6 @@ function Update(){
 	if(refreshing){
 		if(MasterServer.PollHostList().Length > 0){
 			refreshing = false;
-			Debug.Log(MasterServer.PollHostList().Length);
 			hostData = MasterServer.PollHostList();
 		}
 	}

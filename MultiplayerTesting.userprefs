@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AdminSpawnControl.js">
     <Files>
-      <File FileName="Assets\Scripts\AdminSpawnControl.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GoodNetWork.js" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\CameraFollow.js" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\AdminSpawnControl.js" Line="129" Column="43" />
+      <File FileName="Assets\Scripts\GoodNetWork.js" Line="23" Column="1" />
+      <File FileName="Assets\Scripts\CameraFollow.js" Line="17" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
