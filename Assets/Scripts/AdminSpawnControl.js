@@ -12,23 +12,26 @@ private var btnH:float;
 public var selectNumber : int;
 var selected : boolean;
 
-var Player : GameObject;
+public static var Player : GameObject;
 var playerClone: String;
 
 var forwardSpeed : float;
 var turnSpeed : float;
 var style:GUIStyle;
-var acceleration : float;
-var currentSpeed : float;
-var maxSpeed: float;
+var Impulse : float;
+public var currentForce : float;
+var maxForce : float;
 var rolling : boolean;
+var realSpeed : float;
+var reverse : boolean;
 
 function OnLoaded() {
      btnX = Screen.width * 0.01;
      btnY = Screen.width * 0.01;
      btnW = Screen.width * 0.1;
      btnH = Screen.width * 0.05;
-     maxSpeed = 1500000;
+     maxForce = 1500000;
+     reverse = false;
 }
 
 function SpawnCar(){ 
@@ -104,41 +107,51 @@ function OnGUI(){
          style.fontStyle = FontStyle.BoldAndItalic;
          
          style.normal.textColor = Color.white;
-         GUI.Label(Rect(Screen.width - 220, 80, 100, 100),(currentSpeed/4000).ToString(), style);
-         if(Input.GetKey("a")){
+         realSpeed = Player.rigidbody.velocity.magnitude;
+         GUI.Label(Rect(Screen.width - 220, 80, 100, 100),realSpeed.ToString(), style);
+         if(Input.GetKey("a") && !reverse){
              Player.transform.Rotate(0,-0.2,0); 
-         } else if(Input.GetKey("d")){
+         } else if(Input.GetKey("d") && !reverse){
              Player.transform.Rotate(0,0.2,0); 
-         } else if(Input.GetKey("a") && Input.GetKey("s")){
+         } else if(Input.GetKey("a") && reverse){
              Player.transform.Rotate(0,0.2,0); 
-         } else if(Input.GetKey("d") && Input.GetKey("s")){
+         } else if(Input.GetKey("d") && reverse){
              Player.transform.Rotate(0,-0.2,0); 
          } 
          if(Input.GetKey("w")){
-             acceleration = 800;
+             Impulse = 800;
              rolling = false;
          } else if(Input.GetKey("s")){
-             acceleration = -3000;
+             Impulse = -3000;
              rolling = false;
          } else {
              rolling = true;
-             acceleration = 0;
+             Impulse = 0;
          }
-         if(currentSpeed <= maxSpeed && acceleration > 0)
+         if(currentForce <= maxForce && Impulse > 0)
          {   
-             currentSpeed += acceleration;
+             currentForce += Impulse;
+             reverse = false;
          }
-         if(currentSpeed >= (-maxSpeed/50) && acceleration < 0)
+         if(currentForce >= 0 && Impulse < 0 && realSpeed >= 2)
          {
-             currentSpeed += acceleration;
+             currentForce += Impulse;
+             reverse = false;
+         }
+         if(currentForce < 0 && currentForce >= (-maxForce/50) && Impulse < 0 && realSpeed < 2)
+         {
+             currentForce += Impulse;
+             reverse = true;
          } 
          
-         if(rolling && currentSpeed > 0)
-             currentSpeed -= 100;
-         else if(rolling && currentSpeed < 0)
-             currentSpeed += 100;
-            
-         Player.rigidbody.AddRelativeForce(0,0,currentSpeed); 
+         if(rolling && currentForce > 0)
+             currentForce -= 100;
+         else if(rolling && currentForce < 0)
+             currentForce += 100;
+         
+        Player.rigidbody.AddRelativeForce(0,0,currentForce); 
+   
+         
         }
         else if(Application.platform == RuntimePlatform.Android){
          style.fontStyle = FontStyle.Italic;

@@ -58,7 +58,9 @@
      <Compile Include="Assets\Misc Scripts\Visibility Culling\VisibilityCullingArea.js" />
      <Compile Include="Assets\Scripts\AdminSpawnControl.js" />
      <Compile Include="Assets\Scripts\CameraFollow.js" />
+     <Compile Include="Assets\Scripts\DiskSpin.js" />
      <Compile Include="Assets\Scripts\GoodNetWork.js" />
+     <Compile Include="Assets\Scripts\WheelSpin.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\CameraRelativeControl.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\FirstPersonControl.js" />
      <Compile Include="Assets\Standard Assets (Mobile)\Scripts\FollowTransform.js" />
