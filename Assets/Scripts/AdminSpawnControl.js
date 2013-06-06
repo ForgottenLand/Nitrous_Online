@@ -103,10 +103,7 @@ function OnGUI(){
          style.normal.textColor = Color.white;
          style.fontSize = 40;
          GUI.Label(Rect(Screen.width - 370, 80, 100, 100),"Speed: ", style);
-         style.fontSize = 40;
          style.fontStyle = FontStyle.BoldAndItalic;
-         
-         style.normal.textColor = Color.white;
          realSpeed = Player.rigidbody.velocity.magnitude;
          GUI.Label(Rect(Screen.width - 220, 80, 100, 100),realSpeed.ToString(), style);
          if(Input.GetKey("a") && !reverse){
