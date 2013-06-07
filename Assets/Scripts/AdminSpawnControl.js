@@ -96,6 +96,46 @@ function OnGUI(){
          }
          
      }
+     	  if(GUI.Button(Rect(btnX, btnY * 40, btnW, btnH), "Reset")){
+            Application.LoadLevel("Scene1");           
+           
+            selected = false;
+            playerClone = null;
+            
+            
+           if(!selected){
+        	if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), "MoonCar")){
+             selectNumber = 0;
+             selected = true;
+             SpawnCar();
+        	}
+       		else if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), "Arcade")){
+             selectNumber = 1;
+             selected = true;
+             SpawnCar();
+         	}
+         	else if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), "Charger")){
+             selectNumber = 2;
+             selected = true;
+             SpawnCar();
+         	}
+         	else if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), "Colt")){
+             selectNumber = 3;
+             selected = true;
+             SpawnCar();
+         	}
+         	else if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), "Pgt")){
+             selectNumber = 4;
+             selected = true;
+             SpawnCar();
+         	}
+         	else
+         	{
+         	}
+         }
+         
+     
+        }
 
     try{
          if(Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor){
@@ -150,6 +190,9 @@ function OnGUI(){
              currentForce += 100;
          
         Player.rigidbody.AddRelativeForce(0,0,currentForce); 
+        
+      
+  
    
          
         }
@@ -220,6 +263,7 @@ function OnGUI(){
              }
              Player.rigidbody.AddRelativeForce(0,0,0);
          }   
+
         }
         else {
          Debug.Log(Application.platform.ToString());
