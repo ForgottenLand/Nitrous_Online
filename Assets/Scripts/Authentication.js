@@ -14,10 +14,6 @@
 	function Start () {
     	NewUser("john123","john123@hotmail.com","123456","John","Wang");
     	NewUser("superman","superman@hotmail.com","123456","super","man");
-    	Delete("johnwyz44");
-    	Delete("johnwyz33");
-    	Delete("johnwyz22");
-    	Delete("john123");
 	}
  
     
@@ -57,8 +53,7 @@
 		    print("Username: " + UserName + " is added to Database Registry Table");
 	    }
 	}    
-	    
-	    
+	   	    
 	function Delete(UserName){    
 	    
 	    if(Available(UserName)){
@@ -93,8 +88,7 @@
 		    print("Username: " + UserName + " is deleted from Database Registry Table");
 		    return true;
 	    }	     
-    }
-    
+    } 
     
     function Authenticate(UserName, Password){
     	
