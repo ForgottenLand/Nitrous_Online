@@ -12,15 +12,13 @@
 	
 	
 	function Start () {
-    	NewUser("john123","john123@hotmail.com","123456","John","Wang");
-    	NewUser("superman","superman@hotmail.com","123456","super","man");
+	
 	}
  
-    
     function NewUser(UserName, Email, Password, FirstName, LastName){
     	
     	if(!Available(UserName)){
-    		print("Username: " + UserName + " already exists, please choose a different username.");
+    		//print("Username: " + UserName + " already exists, please choose a different username.");
     		return false;
     	}
     	
@@ -50,14 +48,15 @@
 		    reader = null;
 		    dbcon.Close();
 		    dbcon = null;
-		    print("Username: " + UserName + " is added to Database Registry Table");
+		    //print("Username: " + UserName + " is added to Database Registry Table");
+		    return true;
 	    }
 	}    
 	   	    
 	function Delete(UserName){    
 	    
 	    if(Available(UserName)){
-	    	print("Atempt to delete a username: " + UserName + " that does not exist");
+	    	//print("Atempt to delete a username: " + UserName + " that does not exist");
 	    	return false;
 	    } else {
 		    //DATABASE ACCESS INFO: DO NOT MODIFY
@@ -85,7 +84,7 @@
 		    dbcon.Close();
 		    dbcon = null;
 		    	    
-		    print("Username: " + UserName + " is deleted from Database Registry Table");
+		    //print("Username: " + UserName + " is deleted from Database Registry Table");
 		    return true;
 	    }	     
     } 
@@ -127,10 +126,10 @@
 	   				dbcon.Close();
 	   				dbcon = null;
 	   				
-	   				print ("Username: " + UserName + " is authenticated, username is found and password match");
+	   				//print ("Username: " + UserName + " is authenticated, username is found and password match");
 	        		return true;   		
 	        	}
-	        	print ("Username: " + UserName + " is not authenticated, username is found but password does not match");
+	        	//print ("Username: " + UserName + " is not authenticated, username is found but password does not match");
 	        	break;
 	        }
 	    }
@@ -140,7 +139,7 @@
 	    dbcon.Close();
 	    dbcon = null;
     	
-    	print ("Username: " + UserName + " is not found, user is not authenticated");
+    	//print ("Username: " + UserName + " is not found, user is not authenticated");
     	return false;
     }
     
