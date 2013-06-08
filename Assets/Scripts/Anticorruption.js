@@ -67,6 +67,7 @@ var guiStyle : GUIStyle;
 var gmObj : GameObject;
 var auth : Authentication;
 
+
 function Start() {
 	signInBoxWidth = 300;
 	signInBoxHeight = 120;
@@ -101,7 +102,7 @@ function StateSignIn () {
 		UserName = GUI.TextField (Rect (Screen.width - signInBoxWidth + LabelWidth + 10, 40, signInBoxWidth - LabelWidth - 30, TextboxHeight),UserName,40);
 	
 		GUI.Label (Rect (Screen.width - signInBoxWidth, 70, LabelWidth, 22), "Password");
-		Password = GUI.TextField (Rect (Screen.width - signInBoxWidth + LabelWidth + 10, 70, signInBoxWidth - LabelWidth - 30, TextboxHeight),Password,40);
+		Password = GUI.PasswordField (Rect (Screen.width - signInBoxWidth + LabelWidth + 10, 70, signInBoxWidth - LabelWidth - 30, TextboxHeight),Password,40);
 	
 		if( GUI.Button (Rect (Screen.width - signInBoxWidth, 100, (signInBoxWidth - 40) / 2, 22), "Sign in") ) {
 			//Call StateRead
@@ -123,7 +124,7 @@ function StateSignIn () {
 	
 		LabelWidth = 22;
 		GUI.Label (Rect (20, 70, PasswordLabelWidth, 22), "PW");
-		Password = GUI.TextField (Rect (47, 70, Screen.width - 67, TextboxHeight),Password,40);
+		Password = GUI.PasswordField (Rect (47, 70, Screen.width - 67, TextboxHeight),Password,40);
 		
 		if( GUI.Button (Rect (20, 100, (Screen.width - 45) / 2, 22), "Sign in") ) {
 			//Call StateRead
@@ -147,10 +148,10 @@ function StateReg () {
 	UserName = GUI.TextField (Rect (LabelWidth + 30, 40, Screen.width - LabelWidth - 65, TextboxHeight),UserName,40);
 	
 	GUI.Label (Rect (20, 70, LabelWidth, 22), "Password");
-	Password = GUI.TextField (Rect (LabelWidth + 30, 70, Screen.width - LabelWidth - 65, TextboxHeight),Password,40);
+	Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, Screen.width - LabelWidth - 65, TextboxHeight),Password,40);
 	
 	GUI.Label (Rect (20, 100, LabelWidth, 22), "Re-enter");
-	ReEnter = GUI.TextField (Rect (LabelWidth + 30, 100, Screen.width - LabelWidth - 65, TextboxHeight),ReEnter,40);
+	ReEnter = GUI.PasswordField (Rect (LabelWidth + 30, 100, Screen.width - LabelWidth - 65, TextboxHeight),ReEnter,40);
 	
 	GUI.Label (Rect (20, 130, LabelWidth, 22), "Email");
 	Email = GUI.TextField (Rect (LabelWidth + 30, 130, Screen.width - LabelWidth - 65, TextboxHeight),Email,40);
@@ -173,7 +174,7 @@ function StateReg () {
 }
 
 function ReadSignIn() {
-	if(auth.Authenticate(UserName, Password)){
+	if(auth.Authenticate(UserName, Md5Sum(Password))){
 		//User is authenticated
 		print ("Username: " + UserName + " is authenticated, username is found and password match");
 		StateNumber = 3;
@@ -210,7 +211,7 @@ function ReadRegister() {
 		print("LastName should not be null");
 	}
 	else{
-		if(auth.NewUser(UserName, Email, Password, FirstName, LastName)){
+		if(auth.NewUser(UserName, Email, Md5Sum(Password), FirstName, LastName)){
 			//New user is registered
 			print("Username: " + UserName + " is added to Database Registry Table");
 			StateNumber = 3;
@@ -227,18 +228,22 @@ function StateLoggedIn() {
 	
 }
 
-function Hash () {
-	
-}
-
-function Salt () {
-	
-}
-
-function Unhash () {
-	
-}
-
-function Unsalt () {
-	
+static function Md5Sum(strToEncrypt: String)
+{
+	var encoding = System.Text.UTF8Encoding();
+	var bytes = encoding.GetBytes(strToEncrypt);
+ 
+	// encrypt bytes
+	var md5 = System.Security.Cryptography.MD5CryptoServiceProvider();
+	var hashBytes:byte[] = md5.ComputeHash(bytes);
+ 
+	// Convert the encrypted bytes back to a string (base 16)
+	var hashString = "";
+ 
+	for (var i = 0; i < hashBytes.Length; i++)
+	{
+		hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, "0"[0]);
+	}
+ 
+	return hashString.PadLeft(32, "0"[0]);
 }
