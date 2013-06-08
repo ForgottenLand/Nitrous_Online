@@ -1,72 +1,59 @@
+#pragma strict
+
 var StateNumber : int;
 
-var signInBoxWidth;
-var signInBoxHeight;
-var registerBoxWidth;
-var registerBoxHeight;
+var signInBoxWidth : int;
+var signInBoxHeight : int;
+var registerBoxWidth : int;
+var registerBoxHeight : int;
 
 public var UserName : String;
-var UserNameLabelWidth;
 
 public var Email : String;
-var EmailLabelWidth;
 
 public var Password : String;
 public var ReEnter : String;
-var PasswordLabelWidth;
 
 public var FirstName : String;
-var FirstNameLabelWidth;
 
 public var LastName : String;
-var LastNameLabelWidth;
 
 public var CardHolderFirstName : String;
-var CardHolderFirstNameLabelWidth;
 
 public var CardHolderLastName : String;
-var CardHolderLastNameLabelWidth;
 
 public var Address1 : String;
-var Address1LabelWidth;
 
 public var Address2 : String;
-var Address2LabelWidth;
 
 public var City : String;
-var CityLabelWidth;
 
 public var Province : String;
-var ProvinceLabelWidth;
 
 public var Country : String;
-var CountryLabelWidth;
 
 public var Postal : String;
-var PostalLabelWidth;
 
 public var Phone : String;
-var PhoneLabelWidth;
 
 public var CreditNumber : String;
-var CreditNumberLabelWidth;
 
 public var CVV : String;
-var CVVLabelWidth;
 
 public var ExpireMonth : String;
-var ExpireMonthLabelWidth;
 
 public var ExpireYear : String;
-var ExpireYearLabelWidth;
 
-var TextboxHeight;
+var TextboxHeight : int;
 
 var guiStyle : GUIStyle;
 
 var gmObj : GameObject;
 var auth : Authentication;
 
+var LabelWidth : int;
+
+var mask : char;
 
 function Start() {
 	signInBoxWidth = 300;
@@ -77,6 +64,7 @@ function Start() {
 	StateNumber = 1;
 	
 	auth = gmObj.GetComponent(Authentication);
+	mask = System.Convert.ToChar('*');
 }
 
 function OnGUI () {
@@ -102,7 +90,7 @@ function StateSignIn () {
 		UserName = GUI.TextField (Rect (Screen.width - signInBoxWidth + LabelWidth + 10, 40, signInBoxWidth - LabelWidth - 30, TextboxHeight),UserName,40);
 	
 		GUI.Label (Rect (Screen.width - signInBoxWidth, 70, LabelWidth, 22), "Password");
-		Password = GUI.PasswordField (Rect (Screen.width - signInBoxWidth + LabelWidth + 10, 70, signInBoxWidth - LabelWidth - 30, TextboxHeight),Password,40);
+		Password = GUI.PasswordField (Rect (Screen.width - signInBoxWidth + LabelWidth + 10, 70, signInBoxWidth - LabelWidth - 30, TextboxHeight),Password,mask,40);
 	
 		if( GUI.Button (Rect (Screen.width - signInBoxWidth, 100, (signInBoxWidth - 40) / 2, 22), "Sign in") ) {
 			//Call StateRead
@@ -119,12 +107,12 @@ function StateSignIn () {
 		GUI.Box(Rect (10, 10, Screen.width - 20, signInBoxHeight), "Sign in window");
 		
 		LabelWidth = 20;
-		GUI.Label (Rect (20, 40, UserNameLabelWidth, 22), "UN");
+		GUI.Label (Rect (20, 40, LabelWidth, 22), "UN");
 		UserName = GUI.TextField (Rect (45, 40, Screen.width - 65, TextboxHeight),UserName,40);
 	
 		LabelWidth = 22;
-		GUI.Label (Rect (20, 70, PasswordLabelWidth, 22), "PW");
-		Password = GUI.PasswordField (Rect (47, 70, Screen.width - 67, TextboxHeight),Password,40);
+		GUI.Label (Rect (20, 70, LabelWidth, 22), "PW");
+		Password = GUI.PasswordField (Rect (47, 70, Screen.width - 67, TextboxHeight),Password,mask,40);
 		
 		if( GUI.Button (Rect (20, 100, (Screen.width - 45) / 2, 22), "Sign in") ) {
 			//Call StateRead
@@ -148,10 +136,10 @@ function StateReg () {
 	UserName = GUI.TextField (Rect (LabelWidth + 30, 40, Screen.width - LabelWidth - 65, TextboxHeight),UserName,40);
 	
 	GUI.Label (Rect (20, 70, LabelWidth, 22), "Password");
-	Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, Screen.width - LabelWidth - 65, TextboxHeight),Password,40);
+	Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, Screen.width - LabelWidth - 65, TextboxHeight),Password,mask,40);
 	
 	GUI.Label (Rect (20, 100, LabelWidth, 22), "Re-enter");
-	ReEnter = GUI.PasswordField (Rect (LabelWidth + 30, 100, Screen.width - LabelWidth - 65, TextboxHeight),ReEnter,40);
+	ReEnter = GUI.PasswordField (Rect (LabelWidth + 30, 100, Screen.width - LabelWidth - 65, TextboxHeight),ReEnter,mask,40);
 	
 	GUI.Label (Rect (20, 130, LabelWidth, 22), "Email");
 	Email = GUI.TextField (Rect (LabelWidth + 30, 130, Screen.width - LabelWidth - 65, TextboxHeight),Email,40);
@@ -225,7 +213,7 @@ function ReadRegister() {
 }
 
 function StateLoggedIn() {
-	
+	Application.LoadLevel("Scene1");
 }
 
 static function Md5Sum(strToEncrypt: String)
