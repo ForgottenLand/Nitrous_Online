@@ -64,7 +64,11 @@ function SpawnCar(){
 }
 
 function OnGUI(){
-    
+    //Scale screen properly
+	var screenScale: float = Screen.width / 320.0;
+    var scaledMatrix: Matrix4x4 = Matrix4x4.identity.Scale(Vector3(screenScale,screenScale,screenScale));
+    GUI.matrix = scaledMatrix;
+     
      if(!selected){
          if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), "MoonCar")){
              selectNumber = 0;

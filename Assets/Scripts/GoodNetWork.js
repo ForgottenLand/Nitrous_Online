@@ -10,10 +10,10 @@ private var btnH:float;
 
 
 function Start() {
-	btnX = Screen.width * 0.01;
-	btnY = Screen.width * 0.01;
-	btnW = Screen.width * 0.1;
-	btnH = Screen.width * 0.05;
+	btnX = Screen.width * 0.02;
+	btnY = Screen.width * 0.02;
+	btnW = Screen.width * 0.2;
+	btnH = Screen.width * 0.1;
 }
 
 function startServer(){
@@ -42,6 +42,11 @@ function OnMasterServerEvent(mse:MasterServerEvent){
 }
 
 function OnGUI() {
+	//Scale screen properly
+	var screenScale: float = Screen.width / 320.0;
+    var scaledMatrix: Matrix4x4 = Matrix4x4.identity.Scale(Vector3(screenScale,screenScale,screenScale));
+    GUI.matrix = scaledMatrix;
+    
 	if(!Network.isClient && !Network.isServer){
 		if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Server")){
 			Debug.Log("Starting Server");
