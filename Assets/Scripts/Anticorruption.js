@@ -105,7 +105,7 @@ function OnGUI () {
 		break;
 		case 1:
 			GUI.Label (Rect (20, 420 + addHeight, 300, 22), "You are authenticated, username is found and");
-			GUI.Label (Rect (20, 440 + addHeight, 300, 22), "password matches");
+			GUI.Label (Rect (20, 440 + addHeight, 300, 22), "password matches    Loading..");
 		break;
 		case 2:
 			GUI.Label (Rect (20, 420 + addHeight, 300, 22), "Password is incorrect or username does not");
@@ -152,9 +152,14 @@ function StateSignIn () {
 		GUI.Box(Rect (10,10,signInBoxWidth,signInBoxHeight), "Sign in window");
 		
 		GUI.Label (Rect (20, 40, LabelWidth, 22), "Username");
+		if(UserName == ""){
+			GUI.SetNextControlName("UserName");
+			GUI.FocusControl("UserName");
+		}
 		UserName = GUI.TextField (Rect (LabelWidth + 30, 40, signInBoxWidth - LabelWidth - 30, TextboxHeight),UserName,40);
 	
 		GUI.Label (Rect (20, 70, LabelWidth, 22), "Password");
+
 		Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, signInBoxWidth - LabelWidth - 30, TextboxHeight),Password,mask,40);
 	
 		if( GUI.Button (Rect (20, 100, (signInBoxWidth - 40) / 2, 22), "Sign in") ) {
