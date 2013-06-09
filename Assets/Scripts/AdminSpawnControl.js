@@ -28,7 +28,7 @@ var reverse : boolean;
 function OnLoaded() {
      btnX = Screen.width * 0.01;
      btnY = Screen.width * 0.01;
-     btnW = Screen.width * 0.1;
+     btnW = Screen.width * 0.2;
      btnH = Screen.width * 0.05;
      maxForce = 1500000;
      reverse = false;
@@ -64,7 +64,11 @@ function SpawnCar(){
 }
 
 function OnGUI(){
-    
+    //Scale screen properly
+//	var screenScale: float = Screen.width / 320.0;
+//    var scaledMatrix: Matrix4x4 = Matrix4x4.identity.Scale(Vector3(screenScale,screenScale,screenScale));
+//    GUI.matrix = scaledMatrix;
+     
      if(!selected){
          if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), "MoonCar")){
              selectNumber = 0;
@@ -103,10 +107,7 @@ function OnGUI(){
          style.normal.textColor = Color.white;
          style.fontSize = 40;
          GUI.Label(Rect(Screen.width - 370, 80, 100, 100),"Speed: ", style);
-         style.fontSize = 40;
          style.fontStyle = FontStyle.BoldAndItalic;
-         
-         style.normal.textColor = Color.white;
          realSpeed = Player.rigidbody.velocity.magnitude;
          GUI.Label(Rect(Screen.width - 220, 80, 100, 100),realSpeed.ToString(), style);
          if(Input.GetKey("a") && !reverse){
