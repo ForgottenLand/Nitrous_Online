@@ -12,7 +12,8 @@ private var btnH:float;
 public var selectNumber : int;
 var selected : boolean;
 
-public static var Player : GameObject;
+//public static var Player : GameObject;
+public var Player : GameObject;
 var playerClone: String;
 
 var forwardSpeed : float;
@@ -96,46 +97,7 @@ function OnGUI(){
          }
          
      }
-     	  if(GUI.Button(Rect(btnX, btnY * 40, btnW, btnH), "Reset")){
-            Application.LoadLevel("Scene1");           
-           
-            selected = false;
-            playerClone = null;
-            
-            
-           if(!selected){
-        	if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), "MoonCar")){
-             selectNumber = 0;
-             selected = true;
-             SpawnCar();
-        	}
-       		else if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), "Arcade")){
-             selectNumber = 1;
-             selected = true;
-             SpawnCar();
-         	}
-         	else if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), "Charger")){
-             selectNumber = 2;
-             selected = true;
-             SpawnCar();
-         	}
-         	else if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), "Colt")){
-             selectNumber = 3;
-             selected = true;
-             SpawnCar();
-         	}
-         	else if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), "Pgt")){
-             selectNumber = 4;
-             selected = true;
-             SpawnCar();
-         	}
-         	else
-         	{
-         	}
-         }
-         
-     
-        }
+     	 
 
     try{
          if(Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor){
@@ -143,6 +105,11 @@ function OnGUI(){
          style.normal.textColor = Color.white;
          style.fontSize = 40;
          GUI.Label(Rect(Screen.width - 370, 80, 100, 100),"Speed: ", style);
+         
+       
+         
+         
+         
          style.fontSize = 40;
          style.fontStyle = FontStyle.BoldAndItalic;
          
@@ -271,5 +238,55 @@ function OnGUI(){
         }
         catch(UnityException)
         {}
+        
+        
+           if(GUI.Button(Rect(btnX, btnY * 40, btnW, btnH), "Reset")){
+            Application.LoadLevel("Scene1");           
+           
+            selected = false;
+            //selectNumber = 0;
+            playerClone = null;
+            Player = null;
+           // btnX = 0;
+           // btnY = 0;
+           // btnW = 0;
+           // btnH = 0;     
+         	
+         	     if(!selected){
+        	if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), "MoonCar")){
+             selectNumber = 0;
+             selected = true;
+             SpawnCar();
+        	}
+       		else if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), "Arcade")){
+             selectNumber = 1;
+             selected = true;
+             SpawnCar();
+         	}
+         	else if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), "Charger")){
+             selectNumber = 2;
+             selected = true;
+             SpawnCar();
+         	}
+         	else if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), "Colt")){
+             selectNumber = 3;
+             selected = true;
+             SpawnCar();
+         	}
+         	else if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), "Pgt")){
+             selectNumber = 4;
+             selected = true;
+             SpawnCar();
+         	}
+         	else
+         	{
+         	}
+         	}     
+         	  
+         }
+         
+     
+        
+        
 }
 //TODO: How to pass control to car control script
