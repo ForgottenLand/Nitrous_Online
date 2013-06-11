@@ -1,18 +1,38 @@
 fileFormatVersion: 2
-guid: 560347e91035cb84bbb35cb8f5767ae9
+guid: 69514ab4fe9587b4f92a87b00af17d14
 ModelImporter:
   serializedVersion: 15
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Cube
-    6400000: //RootNode
+    100000: Plane
+    100002: RoadChunk_000
+    100004: RoadChunk_001
+    100006: RoadPath1
+    100008: //RootNode
+    400000: Plane
+    400002: RoadChunk_000
+    400004: RoadChunk_001
+    400006: RoadPath1
+    400008: //RootNode
+    2300000: Plane
+    2300002: RoadChunk_000
+    2300004: RoadChunk_001
+    2300006: RoadPath1
+    3300000: Plane
+    3300002: RoadChunk_000
+    3300004: RoadChunk_001
+    3300006: RoadPath1
+    4300000: Plane
+    4300002: RoadPath1
+    4300004: RoadChunk_000
+    4300006: RoadChunk_001
+    6400000: Plane
+    6400002: RoadChunk_000
+    6400004: RoadChunk_001
+    6400006: RoadPath1
     7400000: Default Take
     9500000: //RootNode
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:
