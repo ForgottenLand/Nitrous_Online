@@ -76,7 +76,7 @@ function Update () {
         rr.motorTorque=0.0;
         
         drifting = true;
-        driftingTimer = 0
+        driftingTimer = 0;
         
         
         
