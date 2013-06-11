@@ -29,7 +29,10 @@ var driftFriction: float;
 var driftFwdFriction: float;
 var frictionRatio: float;
 
+var gmobj : GameObject;
+
 function Awake(){
+    
     rigidbody.centerOfMass=Vector3(0,-0.9,0.3);
     pos = transform.position;
     prevPos = pos;
@@ -61,7 +64,7 @@ function Update () {
 	
     power=Input.GetAxis("Vertical") * enginePower * Time.deltaTime * 250.0;
     steer=Input.GetAxis("Horizontal") * maxSteer * Mathf.Clamp(speedTurn/speed, 0, 1);
-    brake=Input.GetKey("space") ? rigidbody.mass * 0.1: 0.0;   
+    brake=Input.GetButton("Jump") ? rigidbody.mass * 0.1: 0.0;   
 
     
 
@@ -76,7 +79,7 @@ function Update () {
         rr.motorTorque=0.0;
         
         drifting = true;
-        driftingTimer = 0
+        driftingTimer = 0;
         
         
         
@@ -93,15 +96,16 @@ function Update () {
     
     if(drifting)
     {
-    	fl.sidewaysFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFriction, regFriction, driftingTimer/driftingTimeout), 2);
-        fr.sidewaysFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFriction, regFriction, driftingTimer/driftingTimeout), 2);
-        rl.sidewaysFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFriction/frictionRatio, regFriction, driftingTimer/driftingTimeout), 2);
-        rr.sidewaysFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFriction/frictionRatio, regFriction, driftingTimer/driftingTimeout), 2);
+    
+    	fl.sidewaysFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFriction, regFriction, driftingTimer/driftingTimeout), 2), driftFriction, 1);
+        fr.sidewaysFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFriction, regFriction, driftingTimer/driftingTimeout), 2), driftFriction, 1);
+        rl.sidewaysFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFriction/frictionRatio, regFriction, driftingTimer/driftingTimeout), 2), driftFriction/frictionRatio, 1);
+        rr.sidewaysFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFriction/frictionRatio, regFriction, driftingTimer/driftingTimeout), 2), driftFriction/frictionRatio, 1);
         
-        fl.forwardFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2);
-        fr.forwardFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2);
-        rl.forwardFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2);
-        rr.forwardFriction.stiffness = Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2);
+        fl.forwardFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2), driftFwdFriction, 1);
+        fr.forwardFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2), driftFwdFriction, 1);
+        rl.forwardFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2), driftFwdFriction, 1);
+        rr.forwardFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2), driftFwdFriction, 1);
     	
     	driftingTimer += Time.deltaTime;
     	
