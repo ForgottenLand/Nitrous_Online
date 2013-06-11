@@ -13,8 +13,6 @@ var brake=0.0;
 var steer=0.0;
 var speedTurn: float;
 
-var prevPos;
-var pos;
 var speed : float;
 
 var style:GUIStyle;
@@ -65,20 +63,20 @@ function Update () {
 
     if(brake > 0.0){
 
-        fl.brakeTorque=brake/20;
-        fr.brakeTorque=brake/20;
-        rl.brakeTorque=brake/20;
-        rr.brakeTorque=brake/20;
+        fl.brakeTorque=brake;
+        fr.brakeTorque=brake;
+        rl.brakeTorque=brake;
+        rr.brakeTorque=brake;
 
         rl.motorTorque=0.0;
         rr.motorTorque=0.0;
         
-        drifting = true;
-        driftingTimer = 0;
+        //drifting = true;
+        //driftingTimer = 0;
         
         
         
-        steer *= 3;
+        //steer *= 3;
     } else {
 
         fl.brakeTorque=0;
@@ -104,6 +102,7 @@ function Update () {
     	
     	//driftingTimer += Time.deltaTime;
     	
+    	steer *= 3;
     	
     }
     else
