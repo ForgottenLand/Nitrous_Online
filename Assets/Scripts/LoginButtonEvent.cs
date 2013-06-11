@@ -20,13 +20,5 @@ public class LoginButtonEvent : MonoBehaviour {
 		}
 	}
 	
-	void OnAwake()
-	{
-		DontDestroyOnLoad(usernameObj);
-		DontDestroyOnLoad(passwordObj);
-		DontDestroyOnLoad(authObj);
-		DontDestroyOnLoad(messageObj);	
-	}
-	
 }
 
