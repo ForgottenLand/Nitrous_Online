@@ -23,13 +23,13 @@ var drifting = false;
 var driftingTimer = 0.0f;
 var driftingTimeout = 2.0f;
 
-
 var regFriction: float;
 var driftFriction: float;
 var driftFwdFriction: float;
 var frictionRatio: float;
 
-var gmobj : GameObject;
+var startDrift;
+var endDrift;
 
 function Awake(){
     
@@ -47,18 +47,6 @@ function Update () {
     style.fontSize = 40;
     style.fontStyle = FontStyle.BoldAndItalic;
     style.normal.textColor = Color.white;
-
-
-
-
-
-
-
-	//prevPos = pos;
-	
-	//pos = transform.position;
-	
-	//speed = Vector3.Distance(pos, prevPos);
 	
 	speed=rigidbody.velocity.magnitude*3.6;
 	
@@ -66,7 +54,14 @@ function Update () {
     steer=Input.GetAxis("Horizontal") * maxSteer * Mathf.Clamp(speedTurn/speed, 0, 1);
     brake=Input.GetButton("Jump") ? rigidbody.mass * 0.1: 0.0;   
 
-    
+	if(startDrift)
+	{
+		drifting = true;
+	}
+	else if(endDrift)
+	{
+		drifting = false;
+	}
 
     if(brake > 0.0){
 
@@ -107,7 +102,7 @@ function Update () {
         rl.forwardFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2), driftFwdFriction, 1);
         rr.forwardFriction.stiffness = Mathf.Clamp(Mathf.Pow(Mathf.Lerp(driftFwdFriction, 1, driftingTimer/driftingTimeout), 2), driftFwdFriction, 1);
     	
-    	driftingTimer += Time.deltaTime;
+    	//driftingTimer += Time.deltaTime;
     	
     	
     }
@@ -124,11 +119,11 @@ function Update () {
         rr.forwardFriction.stiffness = 1;
     }
     
-    if(driftingTimer >= driftingTimeout)
-    {
-    	drifting = false;
-    	driftingTimer = 0.0f;
-    }
+//    if(driftingTimer >= driftingTimeout)
+//    {
+//    	drifting = false;
+//    	driftingTimer = 0.0f;
+//    }
     
     fl.steerAngle=steer;
     fr.steerAngle=steer;
