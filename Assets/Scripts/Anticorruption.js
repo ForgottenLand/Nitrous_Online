@@ -51,6 +51,8 @@ var guiStyle : GUIStyle;
 var gmObj : GameObject;
 var auth : Authentication;
 
+var buttonObj : GameObject;
+
 var LabelWidth : int;
 
 var mask : char;
@@ -73,12 +75,12 @@ function Start() {
 
 function OnGUI () {
 	//Scale screen properly
-	var screenScale: float = Screen.width / 320.0;
-    var scaledMatrix: Matrix4x4 = Matrix4x4.identity.Scale(Vector3(screenScale,screenScale,screenScale));
-    GUI.matrix = scaledMatrix;
+//	var screenScale: float = Screen.width / 320.0;
+//    var scaledMatrix: Matrix4x4 = Matrix4x4.identity.Scale(Vector3(screenScale,screenScale,screenScale));
+//    GUI.matrix = scaledMatrix;
     
     var addHeight : int;
-    addHeight = 0;
+    addHeight = -100;
     
     if(Application.platform == RuntimePlatform.Android){
     	print("Android Platform");
@@ -147,67 +149,67 @@ function OnGUI () {
 }
 
 function StateSignIn () {
-	if( Screen.width - signInBoxWidth - 10 >= 10 ) {
-		LabelWidth = 60;
-		GUI.Box(Rect (10,10,signInBoxWidth,signInBoxHeight), "Sign in window");
-		
-		GUI.Label (Rect (20, 40, LabelWidth, 22), "Username");
-		if(UserName == ""){
-			GUI.SetNextControlName("UserName");
-			GUI.FocusControl("UserName");
-		}
-		UserName = GUI.TextField (Rect (LabelWidth + 30, 40, signInBoxWidth - LabelWidth - 30, TextboxHeight),UserName,40);
-	
-		GUI.Label (Rect (20, 70, LabelWidth, 22), "Password");
-
-		Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, signInBoxWidth - LabelWidth - 30, TextboxHeight),Password,mask,40);
-	
-		if( GUI.Button (Rect (20, 100, (signInBoxWidth - 40) / 2, 22), "Sign in") ) {
-			//Call StateRead
-			ReadSignIn();
-		}
-		
-		if( GUI.Button (Rect (20 + (signInBoxWidth - 40) / 2 + 20, 100, (signInBoxWidth - 40) / 2, 22), "Register") ) {
-			//Call StateReg
-			StateNumber = 2;
-		}
-	}	
+//	if( Screen.width - signInBoxWidth - 10 >= 10 ) {
+//		LabelWidth = 60;
+//		GUI.Box(Rect (10,10,signInBoxWidth,signInBoxHeight), "Sign in window");
+//		
+//		GUI.Label (Rect (20, 40, LabelWidth, 22), "Username");
+//		if(UserName == ""){
+//			GUI.SetNextControlName("UserName");
+//			GUI.FocusControl("UserName");
+//		}
+//		UserName = GUI.TextField (Rect (LabelWidth + 30, 40, signInBoxWidth - LabelWidth - 30, TextboxHeight),UserName,40);
+//	
+//		GUI.Label (Rect (20, 70, LabelWidth, 22), "Password");
+//
+//		Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, signInBoxWidth - LabelWidth - 30, TextboxHeight),Password,mask,40);
+//	
+//		if( GUI.Button (Rect (20, 100, (signInBoxWidth - 40) / 2, 22), "Sign in") ) {
+//			//Call StateRead
+//			ReadSignIn();
+//		}
+//		
+//		if( GUI.Button (Rect (20 + (signInBoxWidth - 40) / 2 + 20, 100, (signInBoxWidth - 40) / 2, 22), "Register") ) {
+//			//Call StateReg
+//			StateNumber = 2;
+//		}
+//	}	
 }
 
 function StateReg () {
-	if( Screen.width - signInBoxWidth - 10 >= 10 ) {
-		LabelWidth = 60;
-		
-		GUI.Box(Rect (10, 10, registerBoxWidth, 250), "Registration window");
-		
-		GUI.Label (Rect (20, 40, LabelWidth, 22), "Username");
-		UserName = GUI.TextField (Rect (LabelWidth + 30, 40, registerBoxWidth - LabelWidth - 30, TextboxHeight),UserName,40);
-		
-		GUI.Label (Rect (20, 70, LabelWidth, 22), "Password");
-		Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, registerBoxWidth - LabelWidth - 30, TextboxHeight),Password,mask,40);
-		
-		GUI.Label (Rect (20, 100, LabelWidth, 22), "Re-enter");
-		ReEnter = GUI.PasswordField (Rect (LabelWidth + 30, 100, registerBoxWidth - LabelWidth - 30, TextboxHeight),ReEnter,mask,40);
-		
-		GUI.Label (Rect (20, 130, LabelWidth, 22), "Email");
-		Email = GUI.TextField (Rect (LabelWidth + 30, 130, registerBoxWidth - LabelWidth - 30, TextboxHeight),Email,40);
-		
-		GUI.Label (Rect (20, 160, LabelWidth, 22), "FirstName");
-		FirstName = GUI.TextField (Rect (LabelWidth + 30, 160, registerBoxWidth - LabelWidth - 30, TextboxHeight),FirstName,40);
-		
-		GUI.Label (Rect (20, 190, LabelWidth, 22), "LastName");
-		LastName = GUI.TextField (Rect (LabelWidth + 30, 190, registerBoxWidth - LabelWidth - 30, TextboxHeight),LastName,40);
-			
-		if( GUI.Button (Rect (20, 230, 130, 22), "Back to sign in") ) {
-			//Call StateSignIn
-			StateNumber = 1;
-		}
-			
-		if( GUI.Button (Rect ( signInBoxWidth / 2 + 20, 230, 130, 22), "Confirm") ) {
-			//Call StateReg
-			ReadRegister();
-		}
-	}
+//	if( Screen.width - signInBoxWidth - 10 >= 10 ) {
+//		LabelWidth = 60;
+//		
+//		GUI.Box(Rect (10, 10, registerBoxWidth, 250), "Registration window");
+//		
+//		GUI.Label (Rect (20, 40, LabelWidth, 22), "Username");
+//		UserName = GUI.TextField (Rect (LabelWidth + 30, 40, registerBoxWidth - LabelWidth - 30, TextboxHeight),UserName,40);
+//		
+//		GUI.Label (Rect (20, 70, LabelWidth, 22), "Password");
+//		Password = GUI.PasswordField (Rect (LabelWidth + 30, 70, registerBoxWidth - LabelWidth - 30, TextboxHeight),Password,mask,40);
+//		
+//		GUI.Label (Rect (20, 100, LabelWidth, 22), "Re-enter");
+//		ReEnter = GUI.PasswordField (Rect (LabelWidth + 30, 100, registerBoxWidth - LabelWidth - 30, TextboxHeight),ReEnter,mask,40);
+//		
+//		GUI.Label (Rect (20, 130, LabelWidth, 22), "Email");
+//		Email = GUI.TextField (Rect (LabelWidth + 30, 130, registerBoxWidth - LabelWidth - 30, TextboxHeight),Email,40);
+//		
+//		GUI.Label (Rect (20, 160, LabelWidth, 22), "FirstName");
+//		FirstName = GUI.TextField (Rect (LabelWidth + 30, 160, registerBoxWidth - LabelWidth - 30, TextboxHeight),FirstName,40);
+//		
+//		GUI.Label (Rect (20, 190, LabelWidth, 22), "LastName");
+//		LastName = GUI.TextField (Rect (LabelWidth + 30, 190, registerBoxWidth - LabelWidth - 30, TextboxHeight),LastName,40);
+//			
+//		if( GUI.Button (Rect (20, 230, 130, 22), "Back to sign in") ) {
+//			//Call StateSignIn
+//			StateNumber = 1;
+//		}
+//			
+//		if( GUI.Button (Rect ( signInBoxWidth / 2 + 20, 230, 130, 22), "Confirm") ) {
+//			//Call StateReg
+//			ReadRegister();
+//		}
+//	}
 }
 
 function ReadSignIn() {
