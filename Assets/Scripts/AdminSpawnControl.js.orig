@@ -120,7 +120,7 @@ function OnGUI(){
 =======
 }
     
->>>>>>> d913b46bbe9393bc1b743361cfd0600cb1c1e9b5
+>>>>>>> c2be3ff474b3e3b7c12e799800744c2d098d205e
 
 function Update()
 {
@@ -138,7 +138,7 @@ function Update()
          
          style.fontSize = 40;
 =======
->>>>>>> d913b46bbe9393bc1b743361cfd0600cb1c1e9b5
+>>>>>>> c2be3ff474b3e3b7c12e799800744c2d098d205e
          style.fontStyle = FontStyle.BoldAndItalic;
          realSpeed = Player.rigidbody.velocity.magnitude;
          GUI.Label(Rect(Screen.width - 220, 80, 100, 100),realSpeed.ToString(), style);
