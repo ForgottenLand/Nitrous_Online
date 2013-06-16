@@ -1,4 +1,3 @@
-/*
 var avatar0 : Transform;
 var avatar1 : Transform;
 var avatar2 : Transform;
@@ -27,11 +26,11 @@ var realSpeed : float;
 var reverse : boolean;
 
 //Luke Variables---------------
-var maxTurnAngle: float;
+/*var maxTurnAngle: float;
 var maxImpulse: float;
 var minImpulse: float;
 var speed: float;
-
+*/
 
 //-----------------------------
 
@@ -45,8 +44,9 @@ function OnLoaded() {
      btnY = Screen.width * 0.01;
      btnW = Screen.width * 0.2;
      btnH = Screen.width * 0.05;
-     maxForce = 1500000;
+     maxForce = 200000;
      reverse = false;
+     forwardSpeed = 50000;
 }
 
 function SpawnCar(){ 
@@ -248,9 +248,9 @@ function Update()
         {}
 }
 //TODO: How to pass control to car control script
-*/
 
 
+/*
 //The car transforms
 var avatar0 : Transform;
 var avatar1 : Transform;
@@ -508,7 +508,8 @@ function Update()
         }
         catch(UnityException)
         {}
-        */
+        
         
 }
+*/
 //TODO: How to pass control to car control script
