@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
 var avatar0 : Transform;
 var avatar1 : Transform;
@@ -115,12 +116,7 @@ function OnGUI(){
          {
          }  
      }
-<<<<<<< HEAD
      	 
-=======
-}
-    
->>>>>>> c2be3ff474b3e3b7c12e799800744c2d098d205e
 
 function Update()
 {
@@ -130,15 +126,12 @@ function Update()
          style.normal.textColor = Color.white;
          style.fontSize = 40;
          GUI.Label(Rect(Screen.width - 370, 80, 100, 100),"Speed: ", style);
-<<<<<<< HEAD
          
        
          
          
          
          style.fontSize = 40;
-=======
->>>>>>> c2be3ff474b3e3b7c12e799800744c2d098d205e
          style.fontStyle = FontStyle.BoldAndItalic;
          realSpeed = Player.rigidbody.velocity.magnitude;
          GUI.Label(Rect(Screen.width - 220, 80, 100, 100),realSpeed.ToString(), style);
@@ -319,6 +312,8 @@ function Update()
 */
 
 
+=======
+>>>>>>> larchbell
 //The car transforms
 var avatar0 : Transform;
 var avatar1 : Transform;
@@ -381,23 +376,23 @@ function SpawnCar(){
     switch(selectNumber){
         case 0:
             Network.Instantiate(avatar0, transform.position, transform.rotation, 0);
-            playerClone = "EmptyMoonCar(Clone)"; 
+            playerClone = avatar0.name+"(Clone)"; 
         break;
         case 1:
             Network.Instantiate(avatar1, transform.position, transform.rotation, 0);
-            playerClone = "EmptyArcade(Clone)"; 
+            playerClone = avatar1.name+"(Clone)"; 
         break;
         case 2:
             Network.Instantiate(avatar2, transform.position, transform.rotation, 0);
-            playerClone = "EmptyCharger(Clone)"; 
+            playerClone = avatar2.name+"(Clone)"; 
         break;
         case 3:
             Network.Instantiate(avatar3, transform.position, transform.rotation, 0);
-            playerClone = "EmptyColt(Clone)"; 
+            playerClone = avatar3.name+"(Clone)";
         break;
         case 4:
             Network.Instantiate(avatar4, transform.position, transform.rotation, 0);
-            playerClone = "EmptyPgt(Clone)"; 
+            playerClone = avatar4.name+"(Clone)"; 
         break;
     }
  	
