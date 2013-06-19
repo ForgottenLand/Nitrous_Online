@@ -28,6 +28,8 @@ var frictionRatio : float;
 
 var startDrift;
 var endDrift;
+var pos;
+var prevPos;
 
 var startDriftAngVel : float;
 var endDriftAngVel : float;
