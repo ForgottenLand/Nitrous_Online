@@ -1,4 +1,3 @@
-/*
 var avatar0 : Transform;
 var avatar1 : Transform;
 var avatar2 : Transform;
@@ -248,9 +247,9 @@ function Update()
         {}
 }
 //TODO: How to pass control to car control script
-*/
 
 
+/*
 //The car transforms
 var avatar0 : Transform;
 var avatar1 : Transform;
@@ -508,7 +507,8 @@ function Update()
         }
         catch(UnityException)
         {}
-        */
+        
         
 }
 //TODO: How to pass control to car control script
+*/

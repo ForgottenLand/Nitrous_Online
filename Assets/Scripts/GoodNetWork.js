@@ -67,7 +67,12 @@ function OnGUI() {
 		if(hostData){
 			for(var i = 0; i < hostData.length; i++){
 				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 3, btnH * 0.5),hostData[i].gameName)){
-					Network.Connect(hostData[i]);
+					if(hostData[i].useNat){
+						Network.Connect(hostData[i].guid);
+					}
+					else{
+						Network.Connect(hostData[i]);					
+					}
 					for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
 					}
