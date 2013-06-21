@@ -126,13 +126,36 @@ function SpawnCar(){
     pos = Player.transform.position;
     prevPos = pos;
     
-    frLeft = Player.Find("FrontLeft").GetComponent(WheelCollider);
-    frRight = Player.Find("FrontRight").GetComponent(WheelCollider);
-    reLeft = Player.Find("RearLeft").GetComponent(WheelCollider);
-    reRight = Player.Find("RearRight").GetComponent(WheelCollider);
+//    frLeft = Player.Find("FrontLeft").GetComponent(WheelCollider);
+//    frRight = Player.Find("FrontRight").GetComponent(WheelCollider);
+//    reLeft = Player.Find("RearLeft").GetComponent(WheelCollider);
+//    reRight = Player.Find("RearRight").GetComponent(WheelCollider);
+//    
+//    Debug.Log(Player.ToString());
+//    Debug.Log(Player.GetComponentsInChildren(WheelCollider).Length.ToString());
+//    Debug.Log(Player.GetComponentsInChildren(WheelCollider)[0].ToString());
+//    Debug.Log(Player.GetComponentsInChildren(WheelCollider)[1].ToString());
+//    Debug.Log(Player.GetComponentsInChildren(WheelCollider)[2].ToString());
+//    Debug.Log(Player.GetComponentsInChildren(WheelCollider)[3].ToString());
     
-    Debug.Log(Player.ToString());
-    Debug.Log(frLeft);
+    var carWheels = Player.GetComponentsInChildren(WheelCollider);
+    
+    for(var count = 0; count < 4; count++){
+    	if(carWheels[count].ToString().Contains("FrontLeft")){
+    		frLeft = carWheels[count];
+    		Debug.Log(carWheels[count].ToString());
+    	} else if (carWheels[count].ToString().Contains("FrontRight")){
+    		frRight = carWheels[count];
+    		Debug.Log(carWheels[count].ToString());
+    	} else if (carWheels[count].ToString().Contains("RearLeft")){
+    		reLeft = carWheels[count];
+    		Debug.Log(carWheels[count].ToString());
+    	} else if (carWheels[count].ToString().Contains("RearRight")){
+    		reRight = carWheels[count];
+    		Debug.Log(carWheels[count].ToString());
+    	}
+    	
+    }
 }
 
 function OnGUI(){
