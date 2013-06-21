@@ -44,7 +44,7 @@ function OnLoaded() {
      btnY = Screen.width * 0.01;
      btnW = Screen.width * 0.2;
      btnH = Screen.width * 0.05;
-     maxForce = 1500000;
+     maxForce = 300000;
      reverse = false;
 }
 
