@@ -70,7 +70,7 @@ function OnLoaded() {
     btnH = Screen.width * 0.05;
      //reverse = false;
 	
-	enginePower = 15;
+	enginePower = 60;
     maxSteer = 12;
     power = 0;
     brake = 0;

@@ -14,7 +14,7 @@ var mc : AdminSpawnControl;
 function OnLoaded() {
     distance = 6;
     height = 1.2;
-    heightDamping = 4;
+    heightDamping = 6;
     rotationDamping = 3;
 }
 
