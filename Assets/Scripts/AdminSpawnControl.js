@@ -42,9 +42,7 @@ var speed: float;
 var impulse: float;
 //-----------------------------
 
-
-
-
+var LCar : LukeCar;
 
 
 function OnLoaded() {
@@ -61,22 +59,48 @@ function SpawnCar(){
         case 0:
             Network.Instantiate(avatar0, transform.position, transform.rotation, 0);
             playerClone = avatar0.name+"(Clone)"; 
+            LCar = GameObject.Find(playerClone).gameObject.GetComponent("LukeCar");
+            if(!networkView.isMine)
+			{
+				LCar.enabled = false;
+			}
+            
         break;
         case 1:
             Network.Instantiate(avatar1, transform.position, transform.rotation, 0);
             playerClone = avatar1.name+"(Clone)"; 
+            LCar = GameObject.Find(playerClone).gameObject.GetComponent("LukeCar");
+            if(!networkView.isMine)
+			{
+				LCar.enabled = false;
+			}
         break;
         case 2:
             Network.Instantiate(avatar2, transform.position, transform.rotation, 0);
             playerClone = avatar2.name+"(Clone)"; 
+            LCar = GameObject.Find(playerClone).gameObject.GetComponent("LukeCar");
+            if(!networkView.isMine)
+			{
+				LCar.enabled = false;
+			}
         break;
         case 3:
             Network.Instantiate(avatar3, transform.position, transform.rotation, 0);
             playerClone = avatar3.name+"(Clone)";
+            LCar = GameObject.Find(playerClone).gameObject.GetComponent("LukeCar");
+            if(!networkView.isMine)
+			{
+				LCar.enabled = false;
+			}
         break;
         case 4:
             Network.Instantiate(avatar4, transform.position, transform.rotation, 0);
             playerClone = avatar4.name+"(Clone)"; 
+            LCar = GameObject.Find(playerClone).gameObject.GetComponent("LukeCar");
+            if(!networkView.isMine)
+			{
+				LCar.enabled = false;
+			}
         break;
     }
  	

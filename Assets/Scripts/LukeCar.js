@@ -51,6 +51,8 @@ function Awake(){
 }
 
 function Update () {
+
+	
 	style.fontStyle = FontStyle.Italic;
     style.normal.textColor = Color.white;
     style.fontSize = 40;
@@ -60,6 +62,8 @@ function Update () {
     style.normal.textColor = Color.white;
 	
 	speed=rigidbody.velocity.magnitude * 3.6;
+	
+	
 	
     power=Input.GetAxis("Vertical") * enginePower * Time.deltaTime * 250.0;
     steer=Input.GetAxis("Horizontal") * maxSteer * Mathf.Clamp(speedTurn/speed, 0, 1);
@@ -188,5 +192,6 @@ function Update () {
     frRight.steerAngle=steer;
     
     GUI.Label(Rect(Screen.width - 220, 80, 100, 100), speed.ToString(), style);
+    
     
 }
