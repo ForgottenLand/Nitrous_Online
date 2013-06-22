@@ -8,6 +8,7 @@ private var btnY:float;
 private var btnW:float;
 private var btnH:float;
 
+var admin : AdminSpawnControl;
 
 function Start() {
 	btnX = Screen.width * 0.01;
@@ -67,6 +68,15 @@ function OnGUI() {
 			}
 		}
 	}
+	
+	if(GUI.Button(Rect(Screen.width - btnW, Screen.height - btnH, btnW, btnH), "Restart")){
+		Application.LoadLevel(0);
+		Network.Disconnect();
+		MasterServer.ClearHostList();
+		MasterServer.UnregisterHost();
+     	admin = this.GetComponent(AdminSpawnControl);
+     	admin.selected = false;	
+     }
 }
 
 function OnConnectedToServer() {

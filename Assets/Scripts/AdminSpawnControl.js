@@ -13,13 +13,12 @@ private var btnH:float;
 
 //Which car and whether you've picked it yet.
 public var selectNumber : int;
-var selected : boolean;
+public static var selected : boolean;
 
 //The Player GameObject and its name
 var Player : GameObject;
 var playerClone: String;
 var style:GUIStyle;
-
 
 //Luke Variables---------------
 var frLeft : WheelCollider;
@@ -174,6 +173,8 @@ function OnGUI(){
          {
          }  
      }
+     
+     
 }
     
 

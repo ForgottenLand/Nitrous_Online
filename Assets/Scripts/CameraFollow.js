@@ -14,14 +14,16 @@ var mc : AdminSpawnControl;
 function OnLoaded() {
     distance = 6;
     height = 1.2;
-    heightDamping = 6;
+    heightDamping = 2;
     rotationDamping = 3;
+    
 }
 
 function LateUpdate () {
 	// Early out if we don't have a target
 	try{
 		target = mc.Player.transform;
+		transform.position.y = target.position.y + 0.8;
 	}catch(UnityException)
 	{}
 	
