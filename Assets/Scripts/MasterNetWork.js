@@ -31,6 +31,7 @@ function OnGUI () {
 		if(isMasterServer){
 			Debug.Log("Starting master server");
 			registerServer();
+			
 		} else {
 			Debug.Log("Not eligible to initialize master server");
 		}
@@ -50,12 +51,19 @@ function registerServer () {
 	Network.InitializeServer(32,RemotePort,!Network.HavePublicAddress);
 }
 
+function registerMasterHost () {
+	MasterServer.RegisterHost(gameName,"Multiplayer Master Host @ " + Network.player.ipAddress, "This is a test");
+	for (var go : GameObject in FindObjectsOfType(GameObject)){
+	 	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+	}
+}
+
 function addHost() {
 	MasterServer.RegisterHost(gameName,"Multiplayer Testing @ " + Network.player.ipAddress + " Counter: " + counter, "This is a test");
 	for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
 	}
-	counter ++;
+	counter++;
 }
 
 function deleteHost() {

@@ -15,6 +15,9 @@ private var isMasterServer : boolean;
 var admin : AdminSpawnControl;
 private var connected : boolean;
 
+private var startServer : boolean;
+private var refreshServer : boolean;
+
 function Start() {
 	btnX = Screen.width * 0.01;
 	btnY = Screen.width * 0.01;
@@ -30,23 +33,8 @@ function Start() {
 	}
 	
 	connected = false;
-}
-
-function StartServerInRemoteRequest(){
-
-	Network.Connect(MasterIp,RemotePort);
-	yield WaitForSeconds(10);
-
-	if(Network.connections.Length == 1){
-		Debug.Log("Remote server is available for connection");
-		connected = true;
-		for (var go : GameObject in FindObjectsOfType(GameObject)){
-			go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
-		}
-	} else {
-		Debug.Log("Remote server is not available, please try again");
-		connected = false;
-	}
+	startServer = false;
+	refreshServer = false;
 }
 
 function refreshHostList(){
@@ -74,7 +62,7 @@ function OnGUI() {
 	
 		if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Server")){
 			Debug.Log("Sending remote server request");
-			StartServerInRemoteRequest();
+			refreshHostList();
 		}
 		
 		if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
@@ -88,10 +76,10 @@ function OnGUI() {
 				Application.LoadLevel(1);
 			}
 		}
-
-		if(hostData){
+		
+		if(hostData && refreshServer){
 			for(var i = 0; i < hostData.length; i++){
-				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 3, btnH * 0.5),hostData[i].gameName)){
+				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 4, btnH * 0.5),hostData[i].gameName)){
 					Network.Connect(hostData[i]);
 					for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
@@ -99,6 +87,14 @@ function OnGUI() {
 					System.Threading.Thread.Sleep(3000);
 				}
 			}
+		}
+		
+		if(hostData && startServer){
+			Network.Connect(hostData[0]);
+			for (var go : GameObject in FindObjectsOfType(GameObject)){
+ 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+			}
+			System.Threading.Thread.Sleep(3000);
 		}
 	}
 	
