@@ -10,6 +10,7 @@ private var btnH:float;
 
 private var MasterIp : String;
 private var RemotePort : int;
+private var isMasterServer : boolean;
 
 var admin : AdminSpawnControl;
 private var connected : boolean;
@@ -20,9 +21,15 @@ function Start() {
 	btnW = Screen.width * 0.1;
 	btnH = Screen.width * 0.05;
 	
-	connected = false;
 	MasterIp = "192.168.0.100";
 	RemotePort = 25002;
+	if(Network.player.ipAddress == MasterIp){
+		isMasterServer = true;
+	} else {
+		isMasterServer = false;
+	}
+	
+	connected = false;
 }
 
 function StartServerInRemoteRequest(){
@@ -73,6 +80,13 @@ function OnGUI() {
 		if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
 			Debug.Log("Refreshing");
 			refreshHostList();
+		}
+		
+		if(isMasterServer){
+			if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Master Server")){
+				Debug.Log("Loading master server scene");
+				Application.LoadLevel(1);
+			}
 		}
 
 		if(hostData){

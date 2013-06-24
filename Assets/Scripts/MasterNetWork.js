@@ -22,17 +22,23 @@ function Start () {
 	} else {
 		isMasterServer = false;
 	}
+	
 	counter = 0;
 }
 
 function OnGUI () {
-	if(GUI.Button(Rect(btnX, btnY * 13, btnW * 3, btnH), "Start Master Server")){
+	if(GUI.Button(Rect(btnX, btnY, btnW * 3, btnH), "Start Master Server")){
 		if(isMasterServer){
 			Debug.Log("Starting master server");
 			registerServer();
 		} else {
 			Debug.Log("Not eligible to initialize master server");
 		}
+	}
+	
+	if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Return")){
+		Debug.Log("Returning to scene1");
+		Application.LoadLevel(0);
 	}
 }
 
