@@ -8,18 +8,38 @@ private var btnY:float;
 private var btnW:float;
 private var btnH:float;
 
+private var MasterIp : String;
+private var RemotePort : int;
+
 var admin : AdminSpawnControl;
+private var connected : boolean;
 
 function Start() {
 	btnX = Screen.width * 0.01;
 	btnY = Screen.width * 0.01;
 	btnW = Screen.width * 0.1;
 	btnH = Screen.width * 0.05;
+	
+	connected = false;
+	MasterIp = "192.168.0.100";
+	RemotePort = 25002;
 }
 
-function startServer(){
-	Network.InitializeServer(32,25002, !Network.HavePublicAddress);
-	MasterServer.RegisterHost(gameName,"Multiplayer Testing @ " + Network.player.ipAddress,"This is a test");
+function StartServerInRemoteRequest(){
+
+	Network.Connect(MasterIp,RemotePort);
+	yield WaitForSeconds(10);
+
+	if(Network.connections.Length == 1){
+		Debug.Log("Remote server is available for connection");
+		connected = true;
+		for (var go : GameObject in FindObjectsOfType(GameObject)){
+			go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+		}
+	} else {
+		Debug.Log("Remote server is not available, please try again");
+		connected = false;
+	}
 }
 
 function refreshHostList(){
@@ -44,19 +64,17 @@ function OnMasterServerEvent(mse:MasterServerEvent){
 
 function OnGUI() {
 	if(!Network.isClient && !Network.isServer){
-		if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Server")){
-			Debug.Log("Starting Server");
-			startServer();
-			for (var go : GameObject in FindObjectsOfType(GameObject)){
-	 	 		go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
-			}
-		}
 	
-			if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
+		if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Server")){
+			Debug.Log("Sending remote server request");
+			StartServerInRemoteRequest();
+		}
+		
+		if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
 			Debug.Log("Refreshing");
 			refreshHostList();
 		}
-		
+
 		if(hostData){
 			for(var i = 0; i < hostData.length; i++){
 				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 3, btnH * 0.5),hostData[i].gameName)){
@@ -64,6 +82,7 @@ function OnGUI() {
 					for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
 					}
+					System.Threading.Thread.Sleep(3000);
 				}
 			}
 		}
@@ -80,13 +99,12 @@ function OnGUI() {
 }
 
 function OnConnectedToServer() {
-	 
 	for (var go : GameObject in FindObjectsOfType(GameObject))
-	 go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);		
+	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);		
 }
  
 
 @RPC
 function ExitCL(){
-  Application.Quit();
+  	Application.Quit();
 }
