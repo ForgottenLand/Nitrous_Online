@@ -92,11 +92,15 @@ function OnGUI() {
 		}
 		
 		if(hostData && startServer){
-			Network.Connect(hostData[0]);
-			for (var go : GameObject in FindObjectsOfType(GameObject)){
- 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+			for(var j = 0; j < hostData.length; j++){
+				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 4, btnH * 0.5),hostData[j].gameName)){
+					Network.Connect(hostData[j]);
+					for (var go : GameObject in FindObjectsOfType(GameObject)){
+	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+					}
+					
+				}
 			}
-			
 		}
 	}
 	

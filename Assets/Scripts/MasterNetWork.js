@@ -52,14 +52,14 @@ function registerServer () {
 }
 
 function registerMasterHost () {
-	MasterServer.RegisterHost(gameName,"Multiplayer Master Host @ " + Network.player.ipAddress, "This is a test");
+	MasterServer.RegisterHost(gameName,"John's Master Host", "This is a test");
 	for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
 	}
 }
 
 function addHost() {
-	MasterServer.RegisterHost(gameName,"Multiplayer Testing @ " + Network.player.ipAddress + " Counter: " + counter, "This is a test");
+	MasterServer.RegisterHost(gameName,"Client's Host @ " + Network.player.ipAddress + " Id: " + counter, "This is a test");
 	for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
 	}
