@@ -86,7 +86,7 @@ function OnGUI() {
 					for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
 					}
-					System.Threading.Thread.Sleep(3000);
+					
 				}
 			}
 		}
@@ -96,7 +96,7 @@ function OnGUI() {
 			for (var go : GameObject in FindObjectsOfType(GameObject)){
  				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
 			}
-			System.Threading.Thread.Sleep(3000);
+			
 		}
 	}
 	
