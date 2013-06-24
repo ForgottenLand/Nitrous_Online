@@ -31,7 +31,7 @@ function OnGUI () {
 		if(isMasterServer){
 			Debug.Log("Starting master server");
 			registerServer();
-			
+			registerMasterHost();
 		} else {
 			Debug.Log("Not eligible to initialize master server");
 		}

@@ -16,7 +16,7 @@ var admin : AdminSpawnControl;
 private var connected : boolean;
 
 private var startServer : boolean;
-private var refreshServer : boolean;
+private var refreshHost : boolean;
 
 function Start() {
 	btnX = Screen.width * 0.01;
@@ -34,7 +34,7 @@ function Start() {
 	
 	connected = false;
 	startServer = false;
-	refreshServer = false;
+	refreshHost = false;
 }
 
 function refreshHostList(){
@@ -63,11 +63,13 @@ function OnGUI() {
 		if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Server")){
 			Debug.Log("Sending remote server request");
 			refreshHostList();
+			startServer = true;
 		}
 		
 		if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
 			Debug.Log("Refreshing");
 			refreshHostList();
+			refreshHost = true;
 		}
 		
 		if(isMasterServer){
@@ -77,7 +79,7 @@ function OnGUI() {
 			}
 		}
 		
-		if(hostData && refreshServer){
+		if(hostData && refreshHost){
 			for(var i = 0; i < hostData.length; i++){
 				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 4, btnH * 0.5),hostData[i].gameName)){
 					Network.Connect(hostData[i]);
