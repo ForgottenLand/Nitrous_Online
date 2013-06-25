@@ -1,13 +1,13 @@
 var gameName = "Multiplayer Testing";
 var counter : int;
-private var MasterIp : String;
-private var RemotePort : int;
-private var isMasterServer : boolean;
+var MasterIp : String;
+var RemotePort : int;
+var isMasterServer : boolean;
 
-private var btnX:float;
-private var btnY:float;
-private var btnW:float;
-private var btnH:float;
+var btnX:float;
+var btnY:float;
+var btnW:float;
+var btnH:float;
 
 function Start () {
 	btnX = Screen.width * 0.01;

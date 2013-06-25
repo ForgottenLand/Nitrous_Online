@@ -7,21 +7,22 @@ var avatar3 : Transform;
 var avatar4 : Transform;
 
 //the button dimensions
-private var btnX:float;
-private var btnY:float;
-private var btnW:float;
-private var btnH:float;
+var btnX:float;
+var btnY:float;
+var btnW:float;
+var btnH:float;
 
 //Which car and whether you've picked it yet.
-public var selectNumber : int;
-public static var selected : boolean;
+var selectNumber : int;
+static var selected : boolean;
 
 //The Player GameObject and its name
 var Player : GameObject;
 var playerClone: String;
 var style:GUIStyle;
 
-//var nView:NetworkView;
+var nView:NetworkView;
+var networkGroup : int;
 
 //Luke Variables---------------
 var frLeft : WheelCollider;
@@ -71,6 +72,7 @@ function OnLoaded() {
     btnW = Screen.width * 0.1;
     btnH = Screen.width * 0.05;
      //reverse = false;
+    networkGroup = 0;
 	
 	enginePower = 60;
     maxSteer = 12;
@@ -97,35 +99,35 @@ function SpawnCar(){
    
     switch(selectNumber){
         case 0:
-            Network.Instantiate(avatar0, transform.position, transform.rotation, 0);
+            Network.Instantiate(avatar0, transform.position, transform.rotation, networkGroup);
             playerClone = avatar0.name+"(Clone)"; 
             
         break;
         case 1:
-            Network.Instantiate(avatar1, transform.position, transform.rotation, 0);
+            Network.Instantiate(avatar1, transform.position, transform.rotation, networkGroup);
             playerClone = avatar1.name+"(Clone)"; 
 
         break;
         case 2:
-            Network.Instantiate(avatar2, transform.position, transform.rotation, 0);
+            Network.Instantiate(avatar2, transform.position, transform.rotation, networkGroup);
             playerClone = avatar2.name+"(Clone)"; 
 
         break;
         case 3:
-            Network.Instantiate(avatar3, transform.position, transform.rotation, 0);
+            Network.Instantiate(avatar3, transform.position, transform.rotation, networkGroup);
             playerClone = avatar3.name+"(Clone)";
 
         break;
         case 4:
-            Network.Instantiate(avatar4, transform.position, transform.rotation, 0);
+            Network.Instantiate(avatar4, transform.position, transform.rotation, networkGroup);
             playerClone = avatar4.name+"(Clone)"; 
 
         break;
     }
  	
   	Player = GameObject.Find(playerClone);
-//  	nView = Player.networkView;
-//  	nView.viewID = Network.AllocateViewID();
+  	nView = Player.networkView;
+  	nView.viewID = Network.AllocateViewID();
     Player.rigidbody.centerOfMass=Vector3(0,-0.9,0.3);
     pos = Player.transform.position;
     prevPos = pos;
@@ -328,7 +330,9 @@ function Update()
 	{}
 }
 
-//function OnApplicationQuit(){
-//	Network.RemoveRPCs(nView.viewID);
-//	Network.Destroy(nView.viewID);
-//}
+function OnApplicationQuit(){
+	Debug.Log(Network.player.ToString());
+	Network.RemoveRPCs(Network.player, networkGroup);
+	Network.Destroy(nView.viewID);
+	networkView.RPC("killObject",RPCMode.AllBuffered);
+}

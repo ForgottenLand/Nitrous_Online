@@ -1,22 +1,22 @@
 var gameName = "Multiplayer Testing";
 
-private var refreshing:boolean;
-private var hostData:HostData[];
+var refreshing:boolean;
+var hostData:HostData[];
 
-private var btnX:float;
-private var btnY:float;
-private var btnW:float;
-private var btnH:float;
+var btnX:float;
+var btnY:float;
+var btnW:float;
+var btnH:float;
 
-private var MasterIp : String;
-private var RemotePort : int;
-private var isMasterServer : boolean;
+var MasterIp : String;
+var RemotePort : int;
+var isMasterServer : boolean;
 
+var startServer : boolean;
+var refreshHost : boolean;
+
+var adminObj : GameObject;
 var admin : AdminSpawnControl;
-private var connected : boolean;
-
-private var startServer : boolean;
-private var refreshHost : boolean;
 
 function Start() {
 	btnX = Screen.width * 0.01;
@@ -32,9 +32,10 @@ function Start() {
 		isMasterServer = false;
 	}
 	
-	connected = false;
 	startServer = false;
 	refreshHost = false;
+	
+	admin = adminObj.GetComponent(AdminSpawnControl);
 }
 
 function refreshHostList(){
@@ -108,8 +109,7 @@ function OnGUI() {
 		Application.LoadLevel(0);
 		MasterServer.UnregisterHost();
 		Network.Disconnect();
-     	admin = this.GetComponent(AdminSpawnControl);
-     	admin.selected = false;	
+		admin.OnApplicationQuit();
      }
 }
 
