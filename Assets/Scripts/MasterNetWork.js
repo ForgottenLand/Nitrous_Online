@@ -69,3 +69,8 @@ function addHost() {
 function deleteHost() {
 
 }
+
+function OnApplicationQuit(){
+	MasterServer.UnregisterHost();
+	Network.Disconnect();
+}

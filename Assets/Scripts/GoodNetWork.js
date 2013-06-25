@@ -106,9 +106,8 @@ function OnGUI() {
 	
 	if(GUI.Button(Rect(Screen.width - btnW, Screen.height - btnH, btnW, btnH), "Restart")){
 		Application.LoadLevel(0);
-		Network.Disconnect();
-		MasterServer.ClearHostList();
 		MasterServer.UnregisterHost();
+		Network.Disconnect();
      	admin = this.GetComponent(AdminSpawnControl);
      	admin.selected = false;	
      }
@@ -123,4 +122,9 @@ function OnConnectedToServer() {
 @RPC
 function ExitCL(){
   	Application.Quit();
+}
+
+function OnApplicationQuit(){
+	MasterServer.UnregisterHost();
+	Network.Disconnect();
 }

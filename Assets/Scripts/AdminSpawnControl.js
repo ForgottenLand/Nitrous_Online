@@ -1,3 +1,4 @@
+//John Variables
 //The car transforms
 var avatar0 : Transform;
 var avatar1 : Transform;
@@ -19,6 +20,8 @@ public static var selected : boolean;
 var Player : GameObject;
 var playerClone: String;
 var style:GUIStyle;
+
+//var nView:NetworkView;
 
 //Luke Variables---------------
 var frLeft : WheelCollider;
@@ -121,6 +124,8 @@ function SpawnCar(){
     }
  	
   	Player = GameObject.Find(playerClone);
+//  	nView = Player.networkView;
+//  	nView.viewID = Network.AllocateViewID();
     Player.rigidbody.centerOfMass=Vector3(0,-0.9,0.3);
     pos = Player.transform.position;
     prevPos = pos;
@@ -322,3 +327,8 @@ function Update()
 	catch(UnityException)
 	{}
 }
+
+//function OnApplicationQuit(){
+//	Network.RemoveRPCs(nView.viewID);
+//	Network.Destroy(nView.viewID);
+//}
