@@ -15,6 +15,11 @@ var btnH:float;
 //Which car and whether you've picked it yet.
 var selectNumber : int;
 static var selected : boolean;
+static var first : boolean;
+static var second : boolean;
+static var third : boolean;
+static var fourth : boolean;
+static var fifth : boolean;
 
 //The Player GameObject and its name
 var Player : GameObject;
@@ -150,34 +155,46 @@ function SpawnCar(){
 function OnGUI(){
     
      if(!selected){
-         if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), avatar0.name)){
-             selectNumber = 0;
-             selected = true;
-             SpawnCar();
+     	if(!first){
+	         if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), avatar0.name)){
+	             selectNumber = 0;
+	             selected = true;
+	             networkView.RPC("SelectCar",RPCMode.All, selectNumber);
+	             SpawnCar();
+	         }
+        }
+        if(!second){
+	         if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), avatar1.name)){
+	             selectNumber = 1;
+	             selected = true;
+	             networkView.RPC("SelectCar",RPCMode.All, selectNumber);
+	             SpawnCar();
+	         }
          }
-         else if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), avatar1.name)){
-             selectNumber = 1;
-             selected = true;
-             SpawnCar();
+         if(!third){
+	         if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), avatar2.name)){
+	             selectNumber = 2;
+	             selected = true;
+	             networkView.RPC("SelectCar",RPCMode.All, selectNumber);
+	             SpawnCar();
+	         }
          }
-         else if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), avatar2.name)){
-             selectNumber = 2;
-             selected = true;
-             SpawnCar();
+         if(!fourth){
+	         if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), avatar3.name)){
+	             selectNumber = 3;
+	             selected = true;
+	             networkView.RPC("SelectCar",RPCMode.All, selectNumber);
+	             SpawnCar();
+	         }
          }
-         else if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), avatar3.name)){
-             selectNumber = 3;
-             selected = true;
-             SpawnCar();
-         }
-         else if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), avatar4.name)){
-             selectNumber = 4;
-             selected = true;
-             SpawnCar();
-         }
-         else
-         {
-         }  
+         if(!fifth){
+	         if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), avatar4.name)){
+	             selectNumber = 4;
+	             selected = true;
+	             networkView.RPC("SelectCar",RPCMode.All, selectNumber);
+	             SpawnCar();
+	         }
+         }    
      }
      
      
@@ -332,6 +349,7 @@ function Update()
 function DestroyPlayerInNetwork(){
 	try{
 		Debug.Log("Destroy player in network");
+		networkView.RPC("UnselectCar",RPCMode.All, selectNumber);
 		Network.RemoveRPCs(Network.player, networkGroup);
 		Network.Destroy(nView.viewID);
 	}
@@ -341,4 +359,48 @@ function DestroyPlayerInNetwork(){
 
 function OnApplicationQuit(){
 	DestroyPlayerInNetwork();
+}
+
+@RPC
+function SelectCar(carNumber : int){
+	switch(carNumber){
+		case 0:
+		First = true;
+		break;
+		case 1:
+		Second = true;
+		break;
+		case 2:
+		Third = true;
+		break;
+		case 3:
+		Fourth = true;
+		break;
+		case 4:
+		Fifth = true;
+		break;
+		
+	}
+}
+
+@RPC
+function UnselectCar(carNumber : int){
+	switch(carNumber){
+		case 0:
+		First = false;
+		break;
+		case 1:
+		Second = false;
+		break;
+		case 2:
+		Third = false;
+		break;
+		case 3:
+		Fourth = false;
+		break;
+		case 4:
+		Fifth = false;
+		break;
+		
+	}
 }
