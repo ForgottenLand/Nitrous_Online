@@ -106,6 +106,7 @@ function OnGUI() {
 	
 	if(GUI.Button(Rect(Screen.width - btnW * 1.04, Screen.height - btnH * 1.2, btnW, btnH), "Restart")){	
 		admin.DestroyPlayerInNetwork();
+		admin.selected = false;
 		MasterServer.UnregisterHost();
 		Network.Disconnect();		
      	Application.LoadLevel("Scene1");

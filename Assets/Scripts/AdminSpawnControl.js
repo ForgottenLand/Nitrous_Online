@@ -331,6 +331,8 @@ function Update()
 
 function DestroyPlayerInNetwork(){
 	try{
+		Debug.Log("Destroy player in network");
+		Network.RemoveRPCs(Network.player, networkGroup);
 		Network.Destroy(nView.viewID);
 	}
 	catch (UnityException)
