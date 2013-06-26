@@ -15,16 +15,16 @@ var isMasterServer : boolean;
 var startServer : boolean;
 var refreshHost : boolean;
 
-var adminObj : GameObject;
 var admin : AdminSpawnControl;
 
 function Start() {
 	btnX = Screen.width * 0.01;
 	btnY = Screen.width * 0.01;
-	btnW = Screen.width * 0.1;
+	btnW = Screen.width * 0.3;
 	btnH = Screen.width * 0.05;
 	
-	MasterIp = "192.168.0.100";
+//	MasterIp = "192.168.0.100";
+	MasterIp = "172.20.1.229";
 	RemotePort = 25002;
 	if(Network.player.ipAddress == MasterIp){
 		isMasterServer = true;
@@ -32,10 +32,9 @@ function Start() {
 		isMasterServer = false;
 	}
 	
+	isMasterServer = true;
 	startServer = false;
 	refreshHost = false;
-	
-	admin = adminObj.GetComponent(AdminSpawnControl);
 }
 
 function refreshHostList(){
@@ -76,13 +75,13 @@ function OnGUI() {
 		if(isMasterServer){
 			if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Master Server")){
 				Debug.Log("Loading master server scene");
-				Application.LoadLevel(1);
+				Application.LoadLevel("MasterServer");
 			}
 		}
 		
 		if(hostData && refreshHost){
 			for(var i = 0; i < hostData.length; i++){
-				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 4, btnH * 0.5),hostData[i].gameName)){
+				if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[i].gameName)){
 					Network.Connect(hostData[i]);
 					for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
@@ -94,7 +93,7 @@ function OnGUI() {
 		
 		if(hostData && startServer){
 			for(var j = 0; j < hostData.length; j++){
-				if(GUI.Button(Rect(btnX  * 2 + btnW, btnY + (btnH*i), btnW * 4, btnH * 0.5),hostData[j].gameName)){
+				if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[j].gameName)){
 					Network.Connect(hostData[j]);
 					for (var go : GameObject in FindObjectsOfType(GameObject)){
 	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
@@ -105,11 +104,11 @@ function OnGUI() {
 		}
 	}
 	
-	if(GUI.Button(Rect(Screen.width - btnW, Screen.height - btnH, btnW, btnH), "Restart")){
-		Application.LoadLevel(0);
+	if(GUI.Button(Rect(Screen.width - btnW * 1.04, Screen.height - btnH * 1.2, btnW, btnH), "Restart")){	
+		admin.DestroyPlayerInNetwork();
 		MasterServer.UnregisterHost();
-		Network.Disconnect();
-		admin.OnApplicationQuit();
+		Network.Disconnect();		
+     	Application.LoadLevel("Scene1");
      }
 }
 

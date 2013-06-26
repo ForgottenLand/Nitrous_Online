@@ -69,7 +69,7 @@ var minDriftSpeed : float;
 function OnLoaded() {
     btnX = Screen.width * 0.01;
     btnY = Screen.width * 0.01;
-    btnW = Screen.width * 0.1;
+    btnW = Screen.width * 0.3;
     btnH = Screen.width * 0.05;
      //reverse = false;
     networkGroup = 0;
@@ -330,7 +330,11 @@ function Update()
 }
 
 function DestroyPlayerInNetwork(){
-	Network.Destroy(nView.viewID);
+	try{
+		Network.Destroy(nView.viewID);
+	}
+	catch (UnityException)
+	{}	
 }
 
 function OnApplicationQuit(){

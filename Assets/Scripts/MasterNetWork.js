@@ -9,13 +9,16 @@ var btnY:float;
 var btnW:float;
 var btnH:float;
 
+var stringId : String;
+
 function Start () {
 	btnX = Screen.width * 0.01;
 	btnY = Screen.width * 0.01;
-	btnW = Screen.width * 0.1;
+	btnW = Screen.width * 0.3;
 	btnH = Screen.width * 0.05;
 	
-	MasterIp = "192.168.0.100";
+//	MasterIp = "192.168.0.100";
+	MasterIp = "172.20.1.229";
 	RemotePort = 25002;
 	if(Network.player.ipAddress == MasterIp){
 		isMasterServer = true;
@@ -23,11 +26,12 @@ function Start () {
 		isMasterServer = false;
 	}
 	
+	isMasterServer = true;
 	counter = 0;
 }
 
 function OnGUI () {
-	if(GUI.Button(Rect(btnX, btnY, btnW * 3, btnH), "Start Master Server")){
+	if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Master Server")){
 		if(isMasterServer){
 			Debug.Log("Starting master server");
 			registerServer();
@@ -37,25 +41,28 @@ function OnGUI () {
 		}
 	}
 	
-	if(GUI.Button(Rect(btnX, btnY * 7, btnW * 3, btnH), "Add Host")){
+	if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Add Host")){
 		if(isMasterServer){
 			Debug.Log("Adding a host");
+			registerServer();
 			addHost();
 		} else {
 			Debug.Log("Not eligible to add host");
 		}
 	}
 	
-	if(GUI.Button(Rect(btnX, btnY * 13, btnW * 3, btnH), "Delete Host")){
+	stringId = GUI.TextField(Rect(btnX, btnY * 13, btnW, btnH),stringId);
+	
+	if(GUI.Button(Rect(btnX + btnW * 1.04, btnY * 13, btnW, btnH), "Delete Host")){
 		if(isMasterServer){
 			Debug.Log("Deleting a host");
-			deleteHost(int.Parse(GUI.TextField(Rect(btnX + btnW * 4, btnY * 7, btnW * 2, btnH),"Id")));
+			deleteHost(int.Parse(stringId));
 		} else {
 			Debug.Log("Not eligible to delete host");
 		}
 	}
 	
-	if(GUI.Button(Rect(btnX, btnY * 19, btnW * 3, btnH), "Return")){
+	if(GUI.Button(Rect(btnX, btnY * 19, btnW, btnH), "Return")){
 		Debug.Log("Returning to scene1");
 		Application.LoadLevel(0);
 	}
