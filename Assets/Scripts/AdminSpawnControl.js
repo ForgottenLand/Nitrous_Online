@@ -127,7 +127,6 @@ function SpawnCar(){
  	
   	Player = GameObject.Find(playerClone);
   	nView = Player.networkView;
-  	nView.viewID = Network.AllocateViewID();
     Player.rigidbody.centerOfMass=Vector3(0,-0.9,0.3);
     pos = Player.transform.position;
     prevPos = pos;
@@ -330,9 +329,10 @@ function Update()
 	{}
 }
 
-function OnApplicationQuit(){
-	Debug.Log(Network.player.ToString());
-	Network.RemoveRPCs(Network.player, networkGroup);
+function DestroyPlayerInNetwork(){
 	Network.Destroy(nView.viewID);
-	networkView.RPC("killObject",RPCMode.AllBuffered);
+}
+
+function OnApplicationQuit(){
+	DestroyPlayerInNetwork();
 }

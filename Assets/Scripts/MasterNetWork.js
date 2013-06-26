@@ -37,7 +37,25 @@ function OnGUI () {
 		}
 	}
 	
-	if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Return")){
+	if(GUI.Button(Rect(btnX, btnY * 7, btnW * 3, btnH), "Add Host")){
+		if(isMasterServer){
+			Debug.Log("Adding a host");
+			addHost();
+		} else {
+			Debug.Log("Not eligible to add host");
+		}
+	}
+	
+	if(GUI.Button(Rect(btnX, btnY * 13, btnW * 3, btnH), "Delete Host")){
+		if(isMasterServer){
+			Debug.Log("Deleting a host");
+			deleteHost(GUI.TextField(Rect(btnX + btnW * 4, btnY * 7, btnW * 2, btnH)));
+		} else {
+			Debug.Log("Not eligible to delete host");
+		}
+	}
+	
+	if(GUI.Button(Rect(btnX, btnY * 19, btnW * 3, btnH), "Return")){
 		Debug.Log("Returning to scene1");
 		Application.LoadLevel(0);
 	}
@@ -66,11 +84,13 @@ function addHost() {
 	counter++;
 }
 
-function deleteHost() {
-
+function deleteHost(int Id) {
+	
 }
 
 function OnApplicationQuit(){
-	MasterServer.UnregisterHost();
-	Network.Disconnect();
+	if(isMasterServer){
+		MasterServer.UnregisterHost();
+		Network.Disconnect();
+	}
 }

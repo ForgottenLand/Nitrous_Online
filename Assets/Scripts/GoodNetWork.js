@@ -117,14 +117,3 @@ function OnConnectedToServer() {
 	for (var go : GameObject in FindObjectsOfType(GameObject))
 	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);		
 }
- 
-
-@RPC
-function ExitCL(){
-  	Application.Quit();
-}
-
-function OnApplicationQuit(){
-	MasterServer.UnregisterHost();
-	Network.Disconnect();
-}
