@@ -49,7 +49,7 @@ function OnGUI () {
 	if(GUI.Button(Rect(btnX, btnY * 13, btnW * 3, btnH), "Delete Host")){
 		if(isMasterServer){
 			Debug.Log("Deleting a host");
-			deleteHost(GUI.TextField(Rect(btnX + btnW * 4, btnY * 7, btnW * 2, btnH)));
+			deleteHost(int.Parse(GUI.TextField(Rect(btnX + btnW * 4, btnY * 7, btnW * 2, btnH),"Id")));
 		} else {
 			Debug.Log("Not eligible to delete host");
 		}
@@ -84,7 +84,7 @@ function addHost() {
 	counter++;
 }
 
-function deleteHost(int Id) {
+function deleteHost(Id : int) {
 	
 }
 
