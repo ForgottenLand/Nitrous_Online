@@ -29,6 +29,7 @@ var style:GUIStyle;
 
 var nView:NetworkView;
 var networkGroup : int;
+var master : MasterNetWork;
 
 //Luke Variables---------------
 var frLeft : WheelCollider;
@@ -156,48 +157,49 @@ function SpawnCar(){
 }
 
 function OnGUI(){
-    
-	if(!selected){
-//		if(!first){
-		     if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), avatar0.name)){
-		         selectNumber = 0;
-		         selected = true;
-		         first = true;
-		         SpawnCar();
-		     }
-//		}
-//		if(!second){
-		     if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), avatar1.name)){
-		         selectNumber = 1;
-		         selected = true;
-		         second = true;
-		         SpawnCar();
-		     }
-//		 }
-//		 if(!third){
-		     if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), avatar2.name)){
-		         selectNumber = 2;
-		         selected = true;
-		         third = true;
-		         SpawnCar();
-		     }
-//		 }
-//		 if(!fourth){
-		     if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), avatar3.name)){
-		         selectNumber = 3;
-		         selected = true;
-		         fourth = true;
-		         SpawnCar();
-		     }
-//		 }
-//		 if(!fifth){
-		     if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), avatar4.name)){
-		         selectNumber = 4;
-		         selected = true;
-		         fifth = true;
-		         SpawnCar();
-		     }
-//		 }    
+    if(!master.MasterServerClicked){
+		if(!selected){
+	//		if(!first){
+			     if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), avatar0.name)){
+			         selectNumber = 0;
+			         selected = true;
+			         first = true;
+			         SpawnCar();
+			     }
+	//		}
+	//		if(!second){
+			     if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), avatar1.name)){
+			         selectNumber = 1;
+			         selected = true;
+			         second = true;
+			         SpawnCar();
+			     }
+	//		 }
+	//		 if(!third){
+			     if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), avatar2.name)){
+			         selectNumber = 2;
+			         selected = true;
+			         third = true;
+			         SpawnCar();
+			     }
+	//		 }
+	//		 if(!fourth){
+			     if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), avatar3.name)){
+			         selectNumber = 3;
+			         selected = true;
+			         fourth = true;
+			         SpawnCar();
+			     }
+	//		 }
+	//		 if(!fifth){
+			     if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), avatar4.name)){
+			         selectNumber = 4;
+			         selected = true;
+			         fifth = true;
+			         SpawnCar();
+			     }
+	//		 }    
+		}
 	}
      
      

@@ -16,6 +16,7 @@ var startServer : boolean;
 var refreshHost : boolean;
 
 var admin : AdminSpawnControl;
+var master : MasterNetWork;
 
 function Start() {
 	btnX = Screen.width * 0.01;
@@ -51,66 +52,64 @@ function Update(){
 	}
 }
 
-function OnMasterServerEvent(mse:MasterServerEvent){
-	if(mse == MasterServerEvent.RegistrationSucceeded){
-		Debug.Log("Registered Server!");
-	}
-}
-
 function OnGUI() {
-	if(!Network.isClient && !Network.isServer){
-	
-		if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Server")){
-			Debug.Log("Sending remote server request");
-			refreshHostList();
-			startServer = true;
-		}
+	if(!master.MasterServerClicked){
+		if(!Network.isClient && !Network.isServer){
 		
-		if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
-			Debug.Log("Refreshing");
-			refreshHostList();
-			refreshHost = true;
-		}
-		
-		if(isMasterServer){
-			if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Master Server")){
-				Debug.Log("Loading master server scene");
-				Application.LoadLevel("MasterServer");
+			if(GUI.Button(Rect(btnX, btnY, btnW, btnH), "Start Server")){
+				Debug.Log("Sending remote server request");
+				refreshHostList();
+				startServer = true;
 			}
-		}
-		
-		if(hostData && refreshHost){
-			for(var i = 0; i < hostData.length; i++){
-				if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[i].gameName)){
-					Network.Connect(hostData[i]);
-					for (var go : GameObject in FindObjectsOfType(GameObject)){
-	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+			
+			if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
+				Debug.Log("Refreshing");
+				refreshHostList();
+				refreshHost = true;
+			}
+			
+			if(isMasterServer){
+				if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Master Server")){
+					Debug.Log("Disable camera");
+//					Application.LoadLevel("MasterServer");
+					GameObject.Find("Main Camera").camera.enabled = false;
+					master.MasterServerClicked = true;
+				}
+			}
+			
+			if(hostData && refreshHost){
+				for(var i = 0; i < hostData.length; i++){
+					if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[i].gameName)){
+						Network.Connect(hostData[i]);
+						for (var go : GameObject in FindObjectsOfType(GameObject)){
+		 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+						}
+						
 					}
-					
+				}
+			}
+			
+			if(hostData && startServer){
+				for(var j = 0; j < hostData.length; j++){
+					if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[j].gameName)){
+						Network.Connect(hostData[j]);
+						for (var go : GameObject in FindObjectsOfType(GameObject)){
+		 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+						}
+						
+					}
 				}
 			}
 		}
 		
-		if(hostData && startServer){
-			for(var j = 0; j < hostData.length; j++){
-				if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[j].gameName)){
-					Network.Connect(hostData[j]);
-					for (var go : GameObject in FindObjectsOfType(GameObject)){
-	 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
-					}
-					
-				}
-			}
-		}
-	}
-	
-	if(GUI.Button(Rect(Screen.width - btnW * 1.04, Screen.height - btnH * 1.2, btnW, btnH), "Restart")){	
-		admin.DestroyPlayerInNetwork();
-		admin.selected = false;
-		MasterServer.UnregisterHost();
-		Network.Disconnect();		
-     	Application.LoadLevel("Scene1");
-     }
+		if(GUI.Button(Rect(Screen.width - btnW * 1.04, Screen.height - btnH * 1.2, btnW, btnH), "Restart")){	
+			admin.DestroyPlayerInNetwork();
+			admin.selected = false;
+			MasterServer.UnregisterHost();
+			Network.Disconnect();		
+	     	Application.LoadLevel("Scene1");
+	     }
+	 }
 }
 
 function OnConnectedToServer() {
