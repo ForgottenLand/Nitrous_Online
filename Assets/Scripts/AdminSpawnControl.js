@@ -15,11 +15,11 @@ var btnH:float;
 //Which car and whether you've picked it yet.
 var selectNumber : int;
 static var selected : boolean;
-var first : boolean;
-var second : boolean;
-var third : boolean;
-var fourth : boolean;
-var fifth : boolean;
+//var first : boolean;
+//var second : boolean;
+//var third : boolean;
+//var fourth : boolean;
+//var fifth : boolean;
 
 
 //The Player GameObject and its name
@@ -158,46 +158,46 @@ function SpawnCar(){
 function OnGUI(){
     
 	if(!selected){
-		if(!first){
+//		if(!first){
 		     if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), avatar0.name)){
 		         selectNumber = 0;
 		         selected = true;
 		         first = true;
 		         SpawnCar();
 		     }
-		}
-		if(!second){
+//		}
+//		if(!second){
 		     if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), avatar1.name)){
 		         selectNumber = 1;
 		         selected = true;
 		         second = true;
 		         SpawnCar();
 		     }
-		 }
-		 if(!third){
+//		 }
+//		 if(!third){
 		     if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), avatar2.name)){
 		         selectNumber = 2;
 		         selected = true;
 		         third = true;
 		         SpawnCar();
 		     }
-		 }
-		 if(!fourth){
+//		 }
+//		 if(!fourth){
 		     if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), avatar3.name)){
 		         selectNumber = 3;
 		         selected = true;
 		         fourth = true;
 		         SpawnCar();
 		     }
-		 }
-		 if(!fifth){
+//		 }
+//		 if(!fifth){
 		     if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), avatar4.name)){
 		         selectNumber = 4;
 		         selected = true;
 		         fifth = true;
 		         SpawnCar();
 		     }
-		 }    
+//		 }    
 	}
      
      
