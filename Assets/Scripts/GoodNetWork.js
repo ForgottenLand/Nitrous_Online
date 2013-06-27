@@ -1,3 +1,4 @@
+var gameType = "Multiplayer Testing";
 var gameName = "Multiplayer Testing";
 
 var refreshing:boolean;
@@ -39,7 +40,8 @@ function Start() {
 }
 
 function refreshHostList(){
-	MasterServer.RequestHostList(gameName);
+	MasterServer.ClearHostList();
+	MasterServer.RequestHostList(gameType);
 	refreshing = true;
 }
 
@@ -61,6 +63,14 @@ function OnGUI() {
 				refreshHostList();
 				startServer = true;
 			}
+			
+//			gameName = GUI.TextField(Rect(btnX, btnY * 7, btnW, btnH),gameName);
+			
+//			if(GUI.Button(Rect(btnX + btnW * 1.04, btnY * 7, btnW, btnH), "Search Hosts")){
+//				Debug.Log("Refreshing");
+//				refreshHostList();
+//				refreshHost = true;
+//			}
 			
 			if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
 				Debug.Log("Refreshing");
