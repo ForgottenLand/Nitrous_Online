@@ -35,12 +35,11 @@ function OnGUI () {
 	if(MasterServerClicked){
 		
 		gameName = GUI.TextField(Rect(btnX, btnY, btnW, btnH),gameName);
+		RemotePort = int.Parse(GUI.TextField(Rect(btnX + btnW * 1.04, btnY, btnW, btnH),RemotePort.ToString()));
 		
-		if(GUI.Button(Rect(btnX + btnW * 1.04, btnY, btnW, btnH), "Add Host")){
+		if(GUI.Button(Rect(btnX + btnW * 2.08, btnY, btnW, btnH), "Add Host")){
 			if(isMasterServer){
-				Debug.Log("Adding a host");
-				registerServer();
-				addHost();
+				AddHost();
 			} else {
 				Debug.Log("Not eligible to add host");
 			}
@@ -51,7 +50,7 @@ function OnGUI () {
 		if(GUI.Button(Rect(btnX + btnW * 1.04, btnY * 7, btnW, btnH), "Delete Host")){
 			if(isMasterServer){
 				Debug.Log("Deleting a host");
-				deleteHost(int.Parse(stringId));
+				DeleteHost(int.Parse(stringId));
 			} else {
 				Debug.Log("Not eligible to delete host");
 			}
@@ -65,7 +64,24 @@ function OnGUI () {
 	}
 }
 
+function AddHost () {
+	try{
+		Network.InitializeServer(32,RemotePort,!Network.HavePublicAddress); 
+		MasterServer.RegisterHost(gameType, gameName, "This is a test");
+		for (var go : GameObject in FindObjectsOfType(GameObject)){
+	 		go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
+		}
+	}
+	catch(UnityException){
+		Debug.Log("Port is already in used, please select a different one");
+	}
+}
+
 function Update () {
+	
+}
+
+function DeleteHost (Id : int) {
 	
 }
 
@@ -73,21 +89,6 @@ function OnMasterServerEvent(mse:MasterServerEvent){
 	if(mse == MasterServerEvent.RegistrationSucceeded){
 		Debug.Log("Registered Server!");
 	}
-}
-
-function registerServer () {
-	Network.InitializeServer(32,RemotePort,!Network.HavePublicAddress); 
-}
-
-function addHost() {
-	MasterServer.RegisterHost(gameType, gameName, "This is a test");
-	for (var go : GameObject in FindObjectsOfType(GameObject)){
-	 	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
-	}
-}
-
-function deleteHost(Id : int) {
-	
 }
 
 function OnApplicationQuit(){
