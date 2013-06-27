@@ -26,8 +26,8 @@ function Start() {
 	btnH = Screen.width * 0.05;
 	
 //	MasterIp = "192.168.0.100";
-	MasterIp = "172.20.1.229";
-	RemotePort = 25002;
+//	MasterIp = "172.20.1.229";
+	RemotePort = 25003;
 	if(Network.player.ipAddress == MasterIp){
 		isMasterServer = true;
 	} else {
@@ -89,7 +89,7 @@ function OnGUI() {
 			
 			if(hostData && refreshHost){
 				for(var i = 0; i < hostData.length; i++){
-					if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[i].gameName)){
+					if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH * i * 1.2), btnW, btnH),hostData[i].gameName)){
 						Network.Connect(hostData[i]);
 						for (var go : GameObject in FindObjectsOfType(GameObject)){
 		 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	
@@ -101,7 +101,7 @@ function OnGUI() {
 			
 			if(hostData && startServer){
 				for(var j = 0; j < hostData.length; j++){
-					if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH*i * 1.2), btnW, btnH),hostData[j].gameName)){
+					if(GUI.Button(Rect(btnX + btnW * 1.04, btnY + (btnH * j * 1.2), btnW, btnH),hostData[j].gameName)){
 						Network.Connect(hostData[j]);
 						for (var go : GameObject in FindObjectsOfType(GameObject)){
 		 	 				go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);	

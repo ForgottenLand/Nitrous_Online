@@ -3,7 +3,6 @@ var gameName = "Multiplayer Testing";
 var MasterIp : String;
 var RemotePort : int;
 var isMasterServer : boolean;
-var serverInitialized : boolean;
 
 var btnX:float;
 var btnY:float;
@@ -20,8 +19,8 @@ function Start () {
 	btnH = Screen.width * 0.05;
 	
 //	MasterIp = "192.168.0.100";
-	MasterIp = "172.20.1.229";
-	RemotePort = 25002;
+//	MasterIp = "172.20.1.229";
+	RemotePort = 25003;
 	if(Network.player.ipAddress == MasterIp){
 		isMasterServer = true;
 	} else {
@@ -30,7 +29,6 @@ function Start () {
 	
 	isMasterServer = true;
 	MasterServerClicked = false;
-	serverInitialized = false;
 }
 
 function OnGUI () {
@@ -38,14 +36,10 @@ function OnGUI () {
 		
 		gameName = GUI.TextField(Rect(btnX, btnY, btnW, btnH),gameName);
 		
-		if(!serverInitialized){
-			registerServer();
-			serverInitialized = true;
-		}
-		
 		if(GUI.Button(Rect(btnX + btnW * 1.04, btnY, btnW, btnH), "Add Host")){
 			if(isMasterServer){
 				Debug.Log("Adding a host");
+				registerServer();
 				addHost();
 			} else {
 				Debug.Log("Not eligible to add host");
