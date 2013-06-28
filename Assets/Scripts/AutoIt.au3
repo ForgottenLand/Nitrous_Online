@@ -4,7 +4,7 @@ Sleep(2000)
 Send("{ENTER}")
 Sleep(2000)
 
-MouseClick("Master Server")
+MouseClick("left",200,220,1,20)
 Sleep(2000)
 
 AutoItSetOption("SendKeyDelay", 400)
