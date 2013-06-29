@@ -29,7 +29,7 @@ var style:GUIStyle;
 
 var nView:NetworkView;
 var networkGroup : int;
-var master : MasterNetwork;
+var master : MasterNetWork;
 
 //Luke Variables---------------
 var frLeft : WheelCollider;

@@ -17,7 +17,7 @@ var startServer : boolean;
 var refreshHost : boolean;
 
 var admin : AdminSpawnControl;
-var master : MasterNetwork;
+var master : MasterNetWork;
 
 static var newLog = new Array();
 var oldInput : String;
