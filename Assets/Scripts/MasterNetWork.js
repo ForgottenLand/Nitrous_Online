@@ -11,6 +11,10 @@ var btnH:float;
 
 var stringId : String;
 public static var MasterServerClicked : boolean;
+var client : ClientNetwork;
+
+var oldLog = new Array();
+var newLog = new Array();
 
 function Start () {
 	btnX = Screen.width * 0.01;
@@ -29,11 +33,11 @@ function Start () {
 	
 	isMasterServer = true;
 	MasterServerClicked = false;
+	
 }
 
 function OnGUI () {
 	if(MasterServerClicked){
-		
 		gameName = GUI.TextField(Rect(btnX, btnY, btnW, btnH),gameName);
 		RemotePort = int.Parse(GUI.TextField(Rect(btnX + btnW * 1.04, btnY, btnW, btnH),RemotePort.ToString()));
 		
@@ -78,7 +82,12 @@ function AddHost () {
 }
 
 function Update () {
-	
+	newLog = client.newLog;
+	if(newLog.length != oldLog.length){
+		Debug.Log("Receive new request!");
+		Debug.Log(oldLog.length);
+		Debug.Log(newLog.length);
+	}
 }
 
 function DeleteHost (Id : int) {
