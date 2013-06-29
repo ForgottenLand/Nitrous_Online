@@ -87,6 +87,7 @@ function Update () {
 		Debug.Log("Receive new request!");
 		Debug.Log(oldLog.length);
 		Debug.Log(newLog.length);
+		oldLog = newLog;
 	}
 }
 

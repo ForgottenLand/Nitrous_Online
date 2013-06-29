@@ -140,18 +140,15 @@ function OnGUI() {
 						Network.Connect(hostData[j]);
 						pending = true;
 						RPCReady = true;
-						oldInput = newInput;
 					}
 				}
 			}
-			
-			if(!pending && RPCReady){
-				Debug.Log("Pending: " + pending);
-				networkView.RPC("sendRequest",RPCMode.All);
-				Debug.Log("Request sent to master server");
-			} else {
-			}
-
+		}
+		
+		if(!pending && RPCReady && !newInput.Equals(oldInput)){
+			Debug.Log("Pending: " + pending);
+			networkView.RPC("sendRequest",RPCMode.All);
+			Debug.Log("Request sent to master server");
 		}
 		
 		if(GUI.Button(Rect(Screen.width - btnW * 1.04, Screen.height - btnH * 1.2, btnW, btnH), "Restart")){	
@@ -180,5 +177,6 @@ function StartMasterServer() {
 @RPC
 function sendRequest() {
 	newLog.Push(newInput);
+	oldInput = newInput;
 	requestSent = true;
 }
