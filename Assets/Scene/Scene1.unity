@@ -964,6 +964,11 @@ MonoBehaviour:
   refreshHost: 0
   admin: {fileID: 1998701715}
   master: {fileID: 1998701719}
+  oldInput: 
+  newInput: 
+  pending: 0
+  requestSent: 0
+  RPCReady: 0
 --- !u!148 &1998701717
 NetworkView:
   m_ObjectHideFlags: 0
@@ -1007,3 +1012,4 @@ MonoBehaviour:
   btnW: 0
   btnH: 0
   stringId: 
+  client: {fileID: 1998701716}

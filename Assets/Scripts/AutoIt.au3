@@ -1,15 +1,33 @@
-Run("C:\Users\John\Documents\MultiplayerProject\Bin\HeliumDemo.exe")
-Sleep(2000)
+Local $currentPort = 25003
+Local $endPort = 25004
 
-Send("{ENTER}")
-Sleep(2000)
+While $currentPort <= $endPort
 
-MouseClick("left",200,220,1,20)
-Sleep(2000)
+   Run("C:\Users\John\Documents\MultiplayerProject\Bin\HeliumDemo.exe")
+   Sleep(1000)
 
-AutoItSetOption("SendKeyDelay", 400)
-Send("{TAB}{TAB}{ENTER}")
-Sleep(2000)
+   MouseClick("left",683,460,1,20)
+   Sleep(1000)
 
-Send("Test Host{TAB}25006{ENTER}")
-Send("{ENTER}")
+   MouseClick("left",683,468,1,20)
+   Sleep(1000)
+
+   Send("{Enter}")
+   Sleep(1000)
+
+   MouseClick("left",450,260,1,20)
+   Sleep(1000)
+
+   MouseClickDrag("left",370,165,550,165,20)
+   Sleep(1000)
+
+   Send("Test Host{TAB}" & $currentPort)
+
+   MouseClick("left",800,165,1,20)
+   Sleep(1000)
+
+   MouseClick("left",920,125,1,20)
+   Sleep(1000)
+
+   $currentPort = $currentPort + 1
+WEnd
