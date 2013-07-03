@@ -136,7 +136,7 @@ function OnGUI() {
 			if(hostData && startServer && !pending){
 				Debug.Log("Hostdata exists");
 				for(var j = 0; j < hostData.length; j++){
-					if(hostData[j].gameName == "Master server" && !Network.isClient){
+					if(hostData[j].gameName == "Multiplayer Testing" && !Network.isClient){
 						Network.Connect(hostData[j]);
 						pending = true;
 						RPCReady = true;
