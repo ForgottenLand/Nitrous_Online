@@ -3,7 +3,7 @@ Local $endPort = 25004
 
 While $currentPort <= $endPort
 
-   Run("C:\Users\John\Documents\MultiplayerProject\Bin\HeliumDemo.exe")
+   Run("C:\MultiplayerProject\Bin\BoronDemo.exe")
    Sleep(1000)
 
    MouseClick("left",683,460,1,20)
