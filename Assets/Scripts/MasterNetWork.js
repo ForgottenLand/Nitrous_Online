@@ -85,6 +85,7 @@ function Update () {
 	newLog = client.newLog;
 	if(newLog.length != oldLog.length){
 		Debug.Log("Receive new request!");
+		RunAutoIt();
 		Debug.Log(oldLog.length);
 		Debug.Log(newLog.length);
 		oldLog = newLog;
@@ -106,4 +107,8 @@ function OnApplicationQuit(){
 		MasterServer.UnregisterHost();
 		Network.Disconnect();
 	}
+}
+
+function RunAutoIt(){
+	
 }
