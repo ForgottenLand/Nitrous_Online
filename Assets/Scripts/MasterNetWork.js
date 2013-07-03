@@ -110,6 +110,6 @@ function OnApplicationQuit(){
 }
 
 function RunAutoIt(){
-	var fileLocation = "C:/MultiplayerProject/Assets/Scripts";
+	var fileLocation = "C:/MultiplayerProject/Assets/Scripts/AutoIt.au3";
 	System.Diagnostics.Process.Start(fileLocation);
 }
