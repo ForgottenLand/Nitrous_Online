@@ -110,5 +110,6 @@ function OnApplicationQuit(){
 }
 
 function RunAutoIt(){
-	
+	var fileLocation = "C:/MultiplayerProject/Assets/Scripts";
+	System.Diagnostics.Process.Start(fileLocation);
 }
