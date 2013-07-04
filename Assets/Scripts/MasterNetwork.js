@@ -22,7 +22,7 @@ function Start () {
 	btnW = Screen.width * 0.3;
 	btnH = Screen.width * 0.05;
 	
-//	MasterIp = "192.168.0.100";
+	MasterIp = "192.168.0.100";
 //	MasterIp = "172.20.1.229";
 	RemotePort = 25003;
 	if(Network.player.ipAddress == MasterIp){
@@ -31,7 +31,7 @@ function Start () {
 		isMasterServer = false;
 	}
 	
-	isMasterServer = true;
+//	isMasterServer = true;
 	MasterServerClicked = false;
 	
 }
