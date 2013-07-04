@@ -1,9 +1,9 @@
-Local $currentPort = 25003
-Local $endPort = 25004
+Local $currentPort = 25005
+Local $endPort = 25005
 
 While $currentPort <= $endPort
 
-   Run("C:\MultiplayerProject\Bin\BoronDemo.exe")
+   Run("C:\MultiplayerProject\Bin\LithiumDemo.exe")
    Sleep(1000)
 
    MouseClick("left",683,460,1,20)
