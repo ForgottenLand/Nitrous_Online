@@ -11,6 +11,7 @@ var btnH:float;
 
 var MasterIp : String;
 var RemotePort : int;
+var MasterPort : int;
 var isMasterServer : boolean;
 
 var startServer : boolean;
@@ -35,6 +36,7 @@ function Start() {
 //	MasterIp = "192.168.0.100";
 //	MasterIp = "172.20.1.229";
 	RemotePort = 25003;
+	MasterPort = 26003;
 	if(Network.player.ipAddress == MasterIp){
 		isMasterServer = true;
 	} else {
@@ -136,7 +138,7 @@ function OnGUI() {
 			if(hostData && startServer && !pending){
 				Debug.Log("Hostdata exists");
 				for(var j = 0; j < hostData.length; j++){
-					if(hostData[j].gameName == "Multiplayer Testing" && !Network.isClient){
+					if(hostData[j].gameName == "Master Server" && !Network.isClient){
 						Network.Connect(hostData[j]);
 						pending = true;
 						RPCReady = true;
@@ -170,8 +172,8 @@ function OnConnectedToServer() {
 }
 
 function StartMasterServer() {
-	Network.InitializeServer(32,25002,!Network.HavePublicAddress); 
-	MasterServer.RegisterHost(gameType, "Master server", "This is a test");
+	Network.InitializeServer(32,MasterPort,!Network.HavePublicAddress); 
+	MasterServer.RegisterHost(gameType, "Master Server", "This is a test");	
 }
 
 @RPC

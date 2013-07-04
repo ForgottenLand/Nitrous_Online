@@ -83,13 +83,15 @@ function AddHost () {
 }
 
 function Update () {
-	newLog = client.newLog;
-	if(newLog.length != oldLog.length){
-		Debug.Log("Receive new request!");
-		RunAutoIt();
-		Debug.Log(oldLog.length);
-		Debug.Log(newLog.length);
-		oldLog = newLog;
+	if(isMasterServer){
+		newLog = client.newLog;
+		if(newLog.length != oldLog.length){
+			Debug.Log("Receive new request!");
+			RunAutoIt();
+			Debug.Log(oldLog.length);
+			Debug.Log(newLog.length);
+			oldLog = newLog;
+		}
 	}
 }
 
