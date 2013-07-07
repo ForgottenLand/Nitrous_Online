@@ -511,6 +511,7 @@ MonoBehaviour:
   btnH: 0
   MasterIp: 
   RemotePort: 0
+  MasterPort: 0
   isMasterServer: 0
   startServer: 0
   refreshHost: 0
@@ -566,7 +567,7 @@ Behaviour:
   m_GameObject: {fileID: 290955198}
   m_Enabled: 1
 --- !u!127 &3
-GameManager:
+LevelGameManager:
   m_ObjectHideFlags: 0
 --- !u!148 &1998701717
 NetworkView:

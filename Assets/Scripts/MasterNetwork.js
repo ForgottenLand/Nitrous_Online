@@ -22,8 +22,8 @@ function Start () {
 	btnW = Screen.width * 0.3;
 	btnH = Screen.width * 0.05;
 	
-	MasterIp = "192.168.0.100";
-//	MasterIp = "172.20.1.229";
+//	MasterIp = "192.168.0.100";
+	MasterIp = "172.20.1.229";
 	RemotePort = 25003;
 	if(Network.player.ipAddress == MasterIp){
 		isMasterServer = true;
@@ -113,7 +113,13 @@ function OnApplicationQuit(){
 }
 
 function RunAutoIt(){
-	var fileLocation = "C:/MultiplayerProject/Assets/Scripts/AutoIt.au3";
-	System.Diagnostics.Process.Start(fileLocation);
-	Debug.Log("Started: " + fileLocation);
+	if(Application.platform != RuntimePlatform.WindowsEditor){
+		var fileLocation = "";
+		if(MasterIp == "192.168.0.100")
+			fileLocation = "C:/MultiplayerProject/Assets/Scripts/IdeaPad.au3";
+		else if(MasterIp == "172.20.1.229")
+			fileLocation = "C:/MultiplayerProject/Assets/Scripts/Kobo.au3";
+		System.Diagnostics.Process.Start(fileLocation);
+		Debug.Log("Started: " + fileLocation);
+	}
 }
