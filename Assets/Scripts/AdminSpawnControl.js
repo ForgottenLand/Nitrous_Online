@@ -29,7 +29,7 @@ var style:GUIStyle;
 
 var nView:NetworkView;
 var networkGroup : int;
-var master : MasterNetwork;
+var adminPanel : AdminPanel;
 
 //Luke Variables---------------
 var frLeft : WheelCollider;
@@ -157,7 +157,7 @@ function SpawnCar(){
 }
 
 function OnGUI(){
-    if(!master.MasterServerClicked){
+    if(!adminPanel.adminPanelClicked){
 		if(!selected){
 	//		if(!first){
 			     if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), avatar0.name)){

@@ -1,8 +1,10 @@
 var gameType = "Multiplayer Testing";
 var gameName = "Multiplayer Testing";
+public static var adminPanelClicked : boolean;
+public static var masterServerCreated : boolean;
 var MasterIp : String;
 var RemotePort : int;
-var isMasterServer : boolean;
+var MasterPort : int;
 
 var btnX:float;
 var btnY:float;
@@ -10,7 +12,7 @@ var btnW:float;
 var btnH:float;
 
 var stringId : String;
-public static var MasterServerClicked : boolean;
+
 var client : ClientNetwork;
 
 var oldLog = new Array();
@@ -23,47 +25,41 @@ function Start () {
 	btnH = Screen.width * 0.05;
 	
 //	MasterIp = "192.168.0.100";
-	MasterIp = "172.20.1.229";
+//	MasterIp = "172.20.1.229";
 	RemotePort = 25003;
-	if(Network.player.ipAddress == MasterIp){
-		isMasterServer = true;
-	} else {
-		isMasterServer = false;
-	}
+	MasterPort = 26003;
 	
-//	isMasterServer = true;
-	MasterServerClicked = false;
-	
+	adminPanelClicked = false;	
+	masterServerCreated = false;
 }
 
 function OnGUI () {
-	if(MasterServerClicked){
-		gameName = GUI.TextField(Rect(btnX, btnY, btnW, btnH),gameName);
-		RemotePort = int.Parse(GUI.TextField(Rect(btnX + btnW * 1.04, btnY, btnW, btnH),RemotePort.ToString()));
-		
-		if(GUI.Button(Rect(btnX + btnW * 2.08, btnY, btnW, btnH), "Add Host")){
-			if(isMasterServer){
+	if(!masterServerCreated){
+		if(adminPanelClicked){
+			gameName = GUI.TextField(Rect(btnX, btnY, btnW, btnH),gameName);
+			RemotePort = int.Parse(GUI.TextField(Rect(btnX + btnW * 1.04, btnY, btnW, btnH),RemotePort.ToString()));
+			
+			if(GUI.Button(Rect(btnX + btnW * 2.08, btnY, btnW, btnH), "Add Host")){
 				AddHost();
-			} else {
-				Debug.Log("Not eligible to add host");
 			}
-		}
-		
-		stringId = GUI.TextField(Rect(btnX, btnY * 7, btnW, btnH),stringId);
-		
-		if(GUI.Button(Rect(btnX + btnW * 1.04, btnY * 7, btnW, btnH), "Delete Host")){
-			if(isMasterServer){
+			
+			stringId = GUI.TextField(Rect(btnX, btnY * 7, btnW, btnH),stringId);
+			
+			if(GUI.Button(Rect(btnX + btnW * 1.04, btnY * 7, btnW, btnH), "Delete Host")){
 				Debug.Log("Deleting a host");
 				DeleteHost(int.Parse(stringId));
-			} else {
-				Debug.Log("Not eligible to delete host");
 			}
-		}
-		
-		if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Return")){
-			Debug.Log("Returning to main menu");
-			MasterServerClicked = false;
-			Application.LoadLevel(0);
+			
+			if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Master Server")){
+				createMasterServer();
+				masterServerCreated = true;
+			}
+			
+			if(GUI.Button(Rect(btnX, btnY * 19, btnW, btnH), "Return")){
+				Debug.Log("Returning to main menu");
+				adminPanelClicked = false;
+				Application.LoadLevel(0);
+			}
 		}
 	}
 }
@@ -83,16 +79,14 @@ function AddHost () {
 }
 
 function Update () {
-	if(isMasterServer){
-		newLog = client.newLog;
-		if(newLog.length != oldLog.length){
-			Debug.Log("Receive new request!");
-			RunAutoIt();
-			Debug.Log(oldLog.length);
-			Debug.Log(newLog.length);
-			oldLog = newLog;
-		}
-	}
+	newLog = client.newLog;
+	if(newLog.length != oldLog.length){
+		Debug.Log("Receive new request!");
+		RunAutoIt();
+		Debug.Log(oldLog.length);
+		Debug.Log(newLog.length);
+		oldLog = newLog;
+	}	
 }
 
 function DeleteHost (Id : int) {
@@ -106,10 +100,13 @@ function OnMasterServerEvent(mse:MasterServerEvent){
 }
 
 function OnApplicationQuit(){
-	if(isMasterServer){
-		MasterServer.UnregisterHost();
-		Network.Disconnect();
-	}
+	MasterServer.UnregisterHost();
+	Network.Disconnect();
+}
+
+function createMasterServer(){
+	Network.InitializeServer(32,MasterPort,!Network.HavePublicAddress); 
+	MasterServer.RegisterHost(gameType, "Master Server", "This is a test");	
 }
 
 function RunAutoIt(){

@@ -12,13 +12,13 @@ var btnH:float;
 var MasterIp : String;
 var RemotePort : int;
 var MasterPort : int;
-var isMasterServer : boolean;
+var isAministrator : boolean;
 
 var startServer : boolean;
 var refreshHost : boolean;
 
 var admin : AdminSpawnControl;
-var master : MasterNetwork;
+var adminPanel : AdminPanel;
 
 static var newLog = new Array();
 var oldInput : String;
@@ -38,12 +38,12 @@ function Start() {
 	RemotePort = 25003;
 	MasterPort = 26003;
 	if(Network.player.ipAddress == MasterIp){
-		isMasterServer = true;
+		isAministrator = true;
 	} else {
-		isMasterServer = false;
+		isAministrator = false;
 	}
 	
-	isMasterServer = true;
+	isAministrator = true;
 	startServer = false;
 	refreshHost = false;
 	oldInput = "";
@@ -83,7 +83,7 @@ function Update(){
 }
 
 function OnGUI() {
-	if(!master.MasterServerClicked){
+	if(!adminPanel.adminPanelClicked){
 		if(!Network.isClient && !Network.isServer){
 		
 			newInput = GUI.TextField(Rect(btnX, btnY, btnW, btnH),newInput);
@@ -112,13 +112,11 @@ function OnGUI() {
 				refreshHost = true;
 			}
 			
-			if(isMasterServer){
-				if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Master Server")){
+			if(isAministrator){
+				if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Admin Panel")){
 					Debug.Log("Disable camera");
-//					Application.LoadLevel("MasterServer");
 					GameObject.Find("Main Camera").camera.enabled = false;
-					master.MasterServerClicked = true;
-					StartMasterServer();
+					adminPanel.adminPanelClicked = true;
 				}
 			}
 			
@@ -169,11 +167,6 @@ function OnGUI() {
 function OnConnectedToServer() {
 	for (var go : GameObject in FindObjectsOfType(GameObject))
 	go.SendMessage("OnLoaded", SendMessageOptions.DontRequireReceiver);		
-}
-
-function StartMasterServer() {
-	Network.InitializeServer(32,MasterPort,!Network.HavePublicAddress); 
-	MasterServer.RegisterHost(gameType, "Master Server", "This is a test");	
 }
 
 @RPC
