@@ -86,7 +86,7 @@ function Update () {
 		Debug.Log(oldLog.length);
 		Debug.Log(newLog.length);
 		oldLog = newLog;
-	}	
+	}
 }
 
 function DeleteHost (Id : int) {
@@ -110,11 +110,11 @@ function createMasterServer(){
 }
 
 function RunAutoIt(){
-	if(Application.platform != RuntimePlatform.WindowsEditor){
+	if(Application.platform == RuntimePlatform.WindowsEditor){
 		var fileLocation = "";
-		if(MasterIp == "192.168.0.100")
+		if(Network.player.ipAddress == "192.168.0.100")
 			fileLocation = "C:/MultiplayerProject/Assets/Scripts/IdeaPad.au3";
-		else if(MasterIp == "172.20.1.229")
+		else if(Network.player.ipAddress == "172.20.1.229")
 			fileLocation = "C:/MultiplayerProject/Assets/Scripts/Kobo.au3";
 		System.Diagnostics.Process.Start(fileLocation);
 		Debug.Log("Started: " + fileLocation);

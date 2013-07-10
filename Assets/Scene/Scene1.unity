@@ -1016,7 +1016,6 @@ MonoBehaviour:
   MasterIp: 
   RemotePort: 0
   MasterPort: 0
-  isAministrator: 0
   btnX: 0
   btnY: 0
   btnW: 0
