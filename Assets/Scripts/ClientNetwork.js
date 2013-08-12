@@ -9,7 +9,8 @@ var btnY:float;
 var btnW:float;
 var btnH:float;
 
-var MasterIp : String;
+var MasterIp1 : String;
+var MasterIp2 : String;
 var RemotePort : int;
 var MasterPort : int;
 var isAministrator : boolean;

@@ -163,7 +163,7 @@ function OnGUI(){
 			     if(GUI.Button(Rect(btnX, btnY * 3, btnW, btnH), avatar0.name)){
 			         selectNumber = 0;
 			         selected = true;
-			         first = true;
+//			         first = true;
 			         SpawnCar();
 			     }
 	//		}
@@ -171,7 +171,7 @@ function OnGUI(){
 			     if(GUI.Button(Rect(btnX, btnY * 9, btnW, btnH), avatar1.name)){
 			         selectNumber = 1;
 			         selected = true;
-			         second = true;
+//			         second = true;
 			         SpawnCar();
 			     }
 	//		 }
@@ -179,7 +179,7 @@ function OnGUI(){
 			     if(GUI.Button(Rect(btnX, btnY * 15, btnW, btnH), avatar2.name)){
 			         selectNumber = 2;
 			         selected = true;
-			         third = true;
+//			         third = true;
 			         SpawnCar();
 			     }
 	//		 }
@@ -187,7 +187,7 @@ function OnGUI(){
 			     if(GUI.Button(Rect(btnX, btnY * 21, btnW, btnH), avatar3.name)){
 			         selectNumber = 3;
 			         selected = true;
-			         fourth = true;
+//			         fourth = true;
 			         SpawnCar();
 			     }
 	//		 }
@@ -195,7 +195,7 @@ function OnGUI(){
 			     if(GUI.Button(Rect(btnX, btnY * 27, btnW, btnH), avatar4.name)){
 			         selectNumber = 4;
 			         selected = true;
-			         fifth = true;
+//			         fifth = true;
 			         SpawnCar();
 			     }
 	//		 }    
