@@ -1,16 +1,16 @@
-public static var gameType = "Multiplayer Testing";
-public static var gameName = "Multiplayer Testing";
-public static var adminPanelClicked : boolean;
-public static var masterServerCreated : boolean;
-public static var MasterIp1 : String;
-public static var MasterIp2 : String;
-public static var RemotePort : int;
-public static var MasterPort : int;
+public static var gameType = "Nitrous Online";
+public static var gameName = "Interview Demo";
+public static var adminPanelClicked = false;
+public static var masterServerCreated = false;
+public static var MasterIp1 = "192.168.0.100";
+public static var MasterIp2 = "172.20.1.229";
+public static var RemotePort = 25003;
+public static var MasterPort = 26000;
 
-var btnX:float;
-var btnY:float;
-var btnW:float;
-var btnH:float;
+public static var btnX = Screen.width * 0.01;
+public static var btnY = Screen.height * 0.01;
+public static var btnW = Screen.width * 0.3;
+public static var btnH = Screen.height * 0.05;
 
 var stringId : String;
 
@@ -19,20 +19,7 @@ var client : ClientNetwork;
 var oldLog = new Array();
 var newLog = new Array();
 
-function Start () {
-	btnX = Screen.width * 0.01;
-	btnY = Screen.width * 0.01;
-	btnW = Screen.width * 0.3;
-	btnH = Screen.width * 0.05;
-	
-	MasterIp1 = "192.168.0.100";
-	MasterIp2 = "172.20.1.229";
-	RemotePort = 25003;
-	MasterPort = 26000;
-	
-	adminPanelClicked = false;	
-	masterServerCreated = false;
-}
+var buttonSize = 4;
 
 function OnGUI () {
 	if(!masterServerCreated){

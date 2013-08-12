@@ -1,7 +1,7 @@
 var gameType;
 var gameName;
 
-var refreshing:boolean;
+var refreshing = false;
 var hostData:HostData[];
 
 var btnX:float;
@@ -13,26 +13,26 @@ var MasterIp1 : String;
 var MasterIp2 : String;
 var RemotePort : int;
 var MasterPort : int;
-var isAministrator : boolean;
+var isAministrator = false;
 
 var startServer : boolean;
-var refreshHost : boolean;
+var refreshHost = false;
 
 var admin : AdminSpawnControl;
 var adminPanel : AdminPanel;
 
 static var newLog = new Array();
-var oldInput : String;
-var newInput : String;
-var pending : boolean;
-var requestSent : boolean;
-var RPCReady : boolean;
+var oldInput = "";
+var newInput = "";
+var pending = false;
+var requestSent = false;
+var RPCReady = false;
 
 function Start() {
-	btnX = Screen.width * 0.01;
-	btnY = Screen.width * 0.01;
-	btnW = Screen.width * 0.3;
-	btnH = Screen.width * 0.05;
+	btnX = adminPanel.btnX;
+	btnY = adminPanel.btnY;
+	btnW = adminPanel.btnW;
+	btnH = adminPanel.btnH;
 	
 	gameType = adminPanel.gameType;
 	gameName = adminPanel.gameName;
@@ -43,20 +43,9 @@ function Start() {
 	RemotePort = adminPanel.RemotePort;
 	MasterPort = adminPanel.MasterPort;
 	
-	if(Network.player.ipAddress == MasterIp1 || Network.player.ipAddress == MasterIp2){
+	if(Network.player.ipAddress.ToString().Contains(MasterIp1) || Network.player.ipAddress.ToString().Contains(MasterIp2)){
 		isAministrator = true;
-	} else {
-		isAministrator = false;
 	}
-	
-	isAministrator = true;
-	startServer = false;
-	refreshHost = false;
-	oldInput = "";
-	newInput = "";
-	pending = false;
-	requestSent = false;
-	RPCReady = false;
 }
 
 function refreshHostList(){
