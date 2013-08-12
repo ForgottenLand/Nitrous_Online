@@ -1,5 +1,5 @@
-var gameType = "Multiplayer Testing";
-var gameName = "Multiplayer Testing";
+var gameType;
+var gameName;
 
 var refreshing:boolean;
 var hostData:HostData[];
@@ -34,10 +34,15 @@ function Start() {
 	btnW = Screen.width * 0.3;
 	btnH = Screen.width * 0.05;
 	
-	MasterIp1 = "192.168.0.100";
-	MasterIp2 = "172.20.1.229";
-	RemotePort = 25003;
-	MasterPort = 26003;
+	gameType = adminPanel.gameType;
+	gameName = adminPanel.gameName;
+	
+	MasterIp1 = adminPanel.MasterIp1;
+	MasterIp2 = adminPanel.MasterIp2;
+	
+	RemotePort = adminPanel.RemotePort;
+	MasterPort = adminPanel.MasterPort;
+	
 	if(Network.player.ipAddress == MasterIp1 || Network.player.ipAddress == MasterIp2){
 		isAministrator = true;
 	} else {

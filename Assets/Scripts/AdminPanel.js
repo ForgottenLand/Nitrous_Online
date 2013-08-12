@@ -1,10 +1,11 @@
-var gameType = "Multiplayer Testing";
-var gameName = "Multiplayer Testing";
+public static var gameType = "Multiplayer Testing";
+public static var gameName = "Multiplayer Testing";
 public static var adminPanelClicked : boolean;
 public static var masterServerCreated : boolean;
-var MasterIp : String;
-var RemotePort : int;
-var MasterPort : int;
+public static var MasterIp1 : String;
+public static var MasterIp2 : String;
+public static var RemotePort : int;
+public static var MasterPort : int;
 
 var btnX:float;
 var btnY:float;
@@ -24,10 +25,10 @@ function Start () {
 	btnW = Screen.width * 0.3;
 	btnH = Screen.width * 0.05;
 	
-//	MasterIp = "192.168.0.100";
-//	MasterIp = "172.20.1.229";
+	MasterIp1 = "192.168.0.100";
+	MasterIp2 = "172.20.1.229";
 	RemotePort = 25003;
-	MasterPort = 26003;
+	MasterPort = 26000;
 	
 	adminPanelClicked = false;	
 	masterServerCreated = false;
