@@ -29,10 +29,10 @@ var requestSent = false;
 var RPCReady = false;
 
 function Start() {
-	btnX = adminPanel.btnX;
-	btnY = adminPanel.btnY;
-	btnW = adminPanel.btnW;
-	btnH = adminPanel.btnH;
+	btnX = Screen.width * 0.01;
+    btnY = Screen.width * 0.01;
+    btnW = Screen.width * 0.3;
+    btnH = Screen.width * 0.05;
 	
 	gameType = adminPanel.gameType;
 	gameName = adminPanel.gameName;

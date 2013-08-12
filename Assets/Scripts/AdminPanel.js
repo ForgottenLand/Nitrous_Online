@@ -7,10 +7,10 @@ public static var MasterIp2 = "172.20.1.229";
 public static var RemotePort = 25003;
 public static var MasterPort = 26000;
 
-public static var btnX = Screen.width * 0.01;
-public static var btnY = Screen.height * 0.01;
-public static var btnW = Screen.width * 0.3;
-public static var btnH = Screen.height * 0.05;
+var btnX : float;
+var btnY : float;
+var btnW : float;
+var btnH : float;
 
 var stringId : String;
 
@@ -20,6 +20,13 @@ var oldLog = new Array();
 var newLog = new Array();
 
 var buttonSize = 4;
+
+function Start () {
+	btnX = Screen.width * 0.01;
+    btnY = Screen.width * 0.01;
+    btnW = Screen.width * 0.3;
+    btnH = Screen.width * 0.05;
+}
 
 function OnGUI () {
 	if(!masterServerCreated){
