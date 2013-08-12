@@ -33,11 +33,11 @@ function Start() {
 	btnW = Screen.width * 0.3;
 	btnH = Screen.width * 0.05;
 	
-//	MasterIp = "192.168.0.100";
-//	MasterIp = "172.20.1.229";
+	MasterIp1 = "192.168.0.100";
+	MasterIp2 = "172.20.1.229";
 	RemotePort = 25003;
 	MasterPort = 26003;
-	if(Network.player.ipAddress == MasterIp){
+	if(Network.player.ipAddress == MasterIp1 || Network.player.ipAddress == MasterIp2){
 		isAministrator = true;
 	} else {
 		isAministrator = false;
@@ -85,35 +85,15 @@ function Update(){
 function OnGUI() {
 	if(!adminPanel.adminPanelClicked){
 		if(!Network.isClient && !Network.isServer){
-		
-			newInput = GUI.TextField(Rect(btnX, btnY, btnW, btnH),newInput);
-		
-			if(GUI.Button(Rect(btnX + btnW * 1.04, btnY, btnW, btnH), "Start Server")){
-				if((!newInput.Equals(oldInput)) && (!newInput.Equals(""))){
-					Debug.Log("oldInput: " + oldInput);
-					Debug.Log("newInput: " + newInput);
-					Debug.Log("Sending remote server request");
-					connectMasterHost();
-					startServer = true;
-				}
-			}
 			
-//			gameName = GUI.TextField(Rect(btnX, btnY * 7, btnW, btnH),gameName);
-			
-//			if(GUI.Button(Rect(btnX + btnW * 1.04, btnY * 7, btnW, btnH), "Search Hosts")){
-//				Debug.Log("Refreshing");
-//				refreshHostList();
-//				refreshHost = true;
-//			}
-			
-			if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Refresh Hosts")){
-				Debug.Log("Refreshing");
-				refreshHostList();
-				refreshHost = true;
+			if(GUI.Button(Rect(btnX, btnY * 1, btnW, btnH), "Start Game")){
+				Debug.Log("Sending remote server request");
+				connectMasterHost();
+				startServer = true;
 			}
 			
 			if(isAministrator){
-				if(GUI.Button(Rect(btnX, btnY * 13, btnW, btnH), "Admin Panel")){
+				if(GUI.Button(Rect(btnX, btnY * 7, btnW, btnH), "Admin Panel")){
 					Debug.Log("Disable camera");
 					GameObject.Find("Main Camera").camera.enabled = false;
 					adminPanel.adminPanelClicked = true;
