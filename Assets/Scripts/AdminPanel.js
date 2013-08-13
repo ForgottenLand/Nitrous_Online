@@ -21,6 +21,13 @@ var newLog = new Array();
 
 var buttonSize = 4;
 
+var playerAmt = 0;
+var state = "empty";
+var timer = 30;
+public static var broadcastPlayerAmt = 0;
+public static var broadcastState = "empty";
+public static var broadcastTimer = 30;
+
 function Start () {
 	btnX = Screen.width * 0.01;
     btnY = Screen.width * 0.01;
@@ -77,11 +84,43 @@ function Update () {
 	newLog = client.newLog;
 	if(newLog.length != oldLog.length){
 		Debug.Log("Receive new request!");
-		RunAutoIt();
+//		RunAutoIt();
 		Debug.Log(oldLog.length);
 		Debug.Log(newLog.length);
 		oldLog = newLog;
 	}
+	
+	if(playerAmt >= 2) {
+		state = "countdown";
+	}
+	
+	if(playerAmt == 1) {
+		state = "waiting";
+	}
+	
+	if(playerAmt == 0) {
+		state = "empty";
+	}
+	
+	if(state.Equals("countdown")) {
+		timer -= Time.deltaTime;
+	}
+	
+	if(state.Equals("countdown") && timer <= 0) {
+		state = "ready";
+	}
+	
+	if(state.Equals("ready")){
+		timer = 30;	
+	}
+	
+	Broadcast();
+}
+
+function OnPlayerConnected(networkPlayer:NetworkPlayer):void
+{
+	 Debug.Log (networkPlayer.guid + " connected");
+	 playerAmt++;
 }
 
 function DeleteHost (Id : int) {
@@ -114,4 +153,11 @@ function RunAutoIt(){
 		System.Diagnostics.Process.Start(fileLocation);
 		Debug.Log("Started: " + fileLocation);
 	}
+}
+
+@RPC
+function Broadcast() {
+	broadcastPlayerAmt = playerAmt;
+	broadcastState = state;
+	broadcastTimer = timer;
 }

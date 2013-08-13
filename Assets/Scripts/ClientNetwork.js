@@ -28,6 +28,14 @@ var pending = false;
 var requestSent = false;
 var RPCReady = false;
 
+var oldPlayerAmt = 0;
+var oldState = "empty";
+var oldTimer = 30;
+
+var newPlayerAmt = 0;
+var newState = "empty";
+var newTimer = 30;
+
 function Start() {
 	btnX = Screen.width * 0.01;
     btnY = Screen.width * 0.01;
@@ -74,6 +82,25 @@ function Update(){
 		Debug.Log("RPCReady: " + RPCReady);
 		Debug.Log("isClient: " + Network.isClient);
 		Debug.Log("isServer: " + Network.isServer);
+	}
+	
+	newPlayerAmt = adminPanel.broadcastPlayerAmt;
+	newState = adminPanel.broadcastState;
+	newTimer = adminPanel.broadcastTimer;
+	
+	if(oldPlayerAmt != newPlayerAmt){
+		Debug.Log("newPlayerAmt = " + newPlayerAmt);
+		oldPlayerAmt = newPlayerAmt;
+	}
+	
+	if(oldState != newState){
+		Debug.Log("newState = " + newState);
+		oldState = newState;
+	}
+	
+	if(oldTimer != newTimer){
+		Debug.Log("newTimer = " + newTimer);
+		oldTimer = newTimer;
 	}
 }
 
