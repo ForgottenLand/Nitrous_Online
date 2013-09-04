@@ -10,7 +10,6 @@ var btnW:float;
 var btnH:float;
 
 var MasterIp1 : String;
-var MasterIp2 : String;
 var RemotePort : int;
 var MasterPort : int;
 var isAministrator = false;
@@ -46,12 +45,11 @@ function Start() {
 	gameName = adminPanel.gameName;
 	
 	MasterIp1 = adminPanel.MasterIp1;
-	MasterIp2 = adminPanel.MasterIp2;
 	
 	RemotePort = adminPanel.RemotePort;
 	MasterPort = adminPanel.MasterPort;
 	
-	if(Network.player.ipAddress.ToString().Contains(MasterIp1) || Network.player.ipAddress.ToString().Contains(MasterIp2)){
+	if(Network.player.ipAddress.ToString().Contains(MasterIp1)){
 		isAministrator = true;
 	}
 }

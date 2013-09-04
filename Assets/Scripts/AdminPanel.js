@@ -2,8 +2,7 @@ public static var gameType = "Nitrous Online";
 public static var gameName = "Interview Demo";
 public static var adminPanelClicked = false;
 public static var masterServerCreated = false;
-public static var MasterIp1 = "192.168.0.100";
-public static var MasterIp2 = "172.20.1.229";
+public static var MasterIp1 = "192.168.0.13";
 public static var RemotePort = 25003;
 public static var MasterPort = 26000;
 
@@ -146,10 +145,9 @@ function createMasterServer(){
 function RunAutoIt(){
 	if(Application.platform == RuntimePlatform.WindowsEditor){
 		var fileLocation = "";
-		if(Network.player.ipAddress == "192.168.0.100")
+		if(Network.player.ipAddress == "192.168.0.13")
 			fileLocation = "C:/MultiplayerProject/Assets/Scripts/IdeaPad.au3";
-		else if(Network.player.ipAddress == "172.20.1.229")
-			fileLocation = "C:/MultiplayerProject/Assets/Scripts/Kobo.au3";
+
 		System.Diagnostics.Process.Start(fileLocation);
 		Debug.Log("Started: " + fileLocation);
 	}
