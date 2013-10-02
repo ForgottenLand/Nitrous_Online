@@ -231,7 +231,7 @@ function Update()
     if( timeleft <= 0.0 )
     {
         // display two fractional digits (f2 format)
-        Debug.Log((accum/frames).ToString("f2"));
+//        Debug.Log((accum/frames).ToString("f2"));
         frameOffSet = accum/frames;
         timeleft = updateInterval;
         accum = 0.0;
@@ -268,11 +268,6 @@ function Update()
 				}
 				steer=Input.acceleration.x * maxSteer * 2 * Mathf.Clamp(speedTurn/speed, 0, 1);
 			}	
-			
-			Debug.Log("****************** Touch length: "+Input.touches.Length.ToString());
-			Debug.Log("****************** android axis: "+androidAxis.ToString());
-			Debug.Log("****************** power: "+power.ToString());
-			Debug.Log("****************** steer: "+steer.ToString());
 		}
 		else{
 			power=Input.GetAxis("Vertical") * enginePower * Time.deltaTime * frameOffSet * 1.3;	
