@@ -70,6 +70,20 @@ var steerMultiplier : float;
 
 var maxSpeed : float;
 var minDriftSpeed : float;
+
+var currentTime : float;
+var previousTime : float;
+var timeDiff : float;
+
+var updateInterval = 0.5;
+ 
+private var accum = 0.0; // FPS accumulated over the interval
+private var frames = 0; // Frames drawn over the interval
+private var timeleft : float; // Left time for current interval
+
+var frameOffSet = 100;
+
+var androidAxis : float;
 //-----------------------------
 
 
@@ -100,6 +114,7 @@ function OnLoaded() {
     steerMultiplier = 1.75;
     maxSpeed = 280;
     minDriftSpeed = 130;
+    androidAxis = 0;
 //  Network.SetReceivingEnabled(networkGroup,true);
 //	Network.SetSendingEnabled(networkGroup,true);
 }
@@ -208,6 +223,21 @@ function OnGUI(){
 
 function Update()
 {
+	timeleft -= Time.deltaTime;
+    accum += Time.timeScale/Time.deltaTime;
+    ++frames;
+ 
+    // Interval ended - update GUI text and start new interval
+    if( timeleft <= 0.0 )
+    {
+        // display two fractional digits (f2 format)
+        Debug.Log((accum/frames).ToString("f2"));
+        frameOffSet = accum/frames;
+        timeleft = updateInterval;
+        accum = 0.0;
+        frames = 0;
+    }
+
 	try{
 //		style.fontStyle = FontStyle.Italic;
 //	    style.normal.textColor = Color.white;
@@ -219,11 +249,37 @@ function Update()
 		
 		speed=Player.rigidbody.velocity.magnitude * 3.6;
 		
-	    power=Input.GetAxis("Vertical") * enginePower * Time.deltaTime * 250.0;
-	    steer=Input.GetAxis("Horizontal") * maxSteer * Mathf.Clamp(speedTurn/speed, 0, 1);
-	    brake=Input.GetButton("Jump") ? brakePower: 0.0;   
-		
-		
+		if(Application.platform == RuntimePlatform.Android){
+			if(androidAxis < 1 && Input.touches.Length > 0){
+				androidAxis += 0.008;
+			}
+			else if(androidAxis > 0 && Input.touches.Length == 0){
+				androidAxis -= 0.007;
+			}
+			power=androidAxis * enginePower * Time.deltaTime * frameOffSet * 1.5;	
+			if(Input.acceleration.x < -0.05){
+				if(Input.acceleration.x < -1){
+					Input.acceleration.x = -1;
+				}
+				steer=Input.acceleration.x * maxSteer * 2 * Mathf.Clamp(speedTurn/speed, 0, 1);
+			} else if(Input.acceleration.x > 0.05){
+				if(Input.acceleration.x < 1){
+					Input.acceleration.x = 1;
+				}
+				steer=Input.acceleration.x * maxSteer * 2 * Mathf.Clamp(speedTurn/speed, 0, 1);
+			}	
+			
+			Debug.Log("****************** Touch length: "+Input.touches.Length.ToString());
+			Debug.Log("****************** android axis: "+androidAxis.ToString());
+			Debug.Log("****************** power: "+power.ToString());
+			Debug.Log("****************** steer: "+steer.ToString());
+		}
+		else{
+			power=Input.GetAxis("Vertical") * enginePower * Time.deltaTime * frameOffSet * 1.3;	
+			steer=Input.GetAxis("Horizontal") * maxSteer * Mathf.Clamp(speedTurn/speed, 0, 1);
+		    brake=Input.GetButton("Jump") ? brakePower: 0.0;   
+		}
+	
 		rigidbodyAngVel = Player.rigidbody.angularVelocity.y;
 		
 		if((rigidbodyAngVel >= startDriftAngVel || rigidbodyAngVel <= - startDriftAngVel) && speed >= minDriftSpeed)

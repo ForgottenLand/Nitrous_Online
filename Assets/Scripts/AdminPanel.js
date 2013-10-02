@@ -89,31 +89,31 @@ function Update () {
 		oldLog = newLog;
 	}
 	
-	if(playerAmt >= 2) {
-		state = "countdown";
-	}
+//	if(playerAmt >= 2) {
+//		state = "countdown";
+//	}
+//	
+//	if(playerAmt == 1) {
+//		state = "waiting";
+//	}
+//	
+//	if(playerAmt == 0) {
+//		state = "empty";
+//	}
 	
-	if(playerAmt == 1) {
-		state = "waiting";
-	}
+//	if(state.Equals("countdown")) {
+//		timer -= Time.deltaTime;
+//	}
+//	
+//	if(state.Equals("countdown") && timer <= 0) {
+//		state = "ready";
+//	}
+//	
+//	if(state.Equals("ready")){
+//		timer = 30;	
+//	}
 	
-	if(playerAmt == 0) {
-		state = "empty";
-	}
-	
-	if(state.Equals("countdown")) {
-		timer -= Time.deltaTime;
-	}
-	
-	if(state.Equals("countdown") && timer <= 0) {
-		state = "ready";
-	}
-	
-	if(state.Equals("ready")){
-		timer = 30;	
-	}
-	
-	Broadcast();
+//	Broadcast();
 }
 
 function OnPlayerConnected(networkPlayer:NetworkPlayer):void
@@ -153,9 +153,9 @@ function RunAutoIt(){
 	}
 }
 
-@RPC
-function Broadcast() {
-	broadcastPlayerAmt = playerAmt;
-	broadcastState = state;
-	broadcastTimer = timer;
-}
+//@RPC
+//function Broadcast() {
+//	broadcastPlayerAmt = playerAmt;
+//	broadcastState = state;
+//	broadcastTimer = timer;
+//}
