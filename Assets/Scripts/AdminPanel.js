@@ -3,6 +3,7 @@ public static var gameName = "Interview Demo";
 public static var adminPanelClicked = false;
 public static var masterServerCreated = false;
 public static var MasterIp1 = "192.168.0.13";
+public static var MasterIp2 = "192.168.0.23";
 public static var RemotePort = 25003;
 public static var MasterPort = 26000;
 
